@@ -1,0 +1,54 @@
+<header th:fragment="header">
+    <!DOCTYPE html>
+    <html lang="en">
+    <header>
+
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+
+        <!--Icons FontAwesome-->
+        <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"-->
+        <!--integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"-->
+        <!--crossorigin="anonymous">-->
+    </header>
+    <body class="bg-gray">
+
+</header>
+
+<nav class="navbar sticky-top navbar-dark bg-dark" th:fragment="topnavbar">
+    <a class="navbar-brand flex-left" Style="color:#aaa" href="/">Inventory list</a>
+    <a class="nav-link my-link flex-right" href="/logout">Logout</a>
+</nav>
+
+<!-- A vertical navbar -->
+<nav class="navbar bg-light sidebar align-items-start pt-4 pr-0 pl-0" th:fragment="leftnavbar">
+    <!-- Links -->
+    <div class="list-group col p-0 m-0">
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/admin/" class="list-group-item list-group-item-action  rounded-0 border-0 "
+               th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/')}? active">Admin</a>
+            <a href="/static/rest_client.html" class="list-group-item list-group-item-action  rounded-0 border-0 ">REST
+                Client</a>
+        </div>
+        <a href="/user/" class="list-group-item list-group-item-action rounded-0 border-0"
+           th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/user/')}? active"
+        >User</a>
+    </div>
+</nav>
+
+<footer th:fragment="footer">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <!--my script-->
+    <script src="/static/js/script.js"></script>
+    </body>
+    </html>
+</footer>

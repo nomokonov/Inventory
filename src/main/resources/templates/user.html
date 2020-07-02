@@ -1,0 +1,29 @@
+<div th:include="common :: header"></div>
+
+<div th:replace="common :: topnavbar"></div>
+
+<div class="container-fluid ">
+    <div class="row ">
+        <div class="col-2 p-0 ">
+            <div th:replace="common :: leftnavbar"></div>
+
+        </div>
+        <div class="col pt-4">
+
+            <h1>User page</h1>
+            <br>
+            <div th:text="|Hello! My dear friend, ${user.name}!|"></div>
+            <!--<div sec:authorize="hasAuthority('Access_Disable')">Text visible to Access_Disable.</div>-->
+            <!--<div sec:authorize="hasAuthority('Access_Enable')">Text visible to Access_Enable.</div>-->
+            <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">Text visible to Access_Disable.</div>
+            <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-usergroup'))}">Text visible to Access_Enable.</div>
+            Authenticated username:
+            <div sec:authentication="name"></div>
+            Authenticated user roles:
+            <div sec:authentication="principal.authorities"></div>
+
+        </div>
+    </div>
+</div>
+
+<div th:include="common :: footer"></div>

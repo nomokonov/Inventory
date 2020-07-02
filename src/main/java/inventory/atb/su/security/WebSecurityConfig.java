@@ -1,0 +1,80 @@
+package inventory.atb.su.security;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
+
+import java.util.Arrays;
+
+
+@Configuration
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
+
+    @Autowired
+    private CustomSuccessHandler customSuccessHandler;
+
+    @Value("${config.ldap-searchbase}")
+    public String LDAP_SEARCHBASE;
+
+    @Value("${config.ldap-domain}")
+    public String LDAP_DOMAIN;
+
+    @Value("${config.ldap-url}")
+    public String LDAP_URL;
+
+    @Value("${config.ldap-filter}")
+    public String LDAP_FILTER;
+
+    @Value("${config.ldap-admingroup}")
+    public String LDAP_ADMINGROUP;
+
+    @Value("${config.ldap-usergroup}")
+    public String LDAP_USERGROUP;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/user/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')");
+        http.authorizeRequests().antMatchers("/admin/**").hasAuthority(LDAP_ADMINGROUP);
+        http
+                .authorizeRequests()
+                .anyRequest().fullyAuthenticated()
+                .and()
+                .formLogin()
+                .successHandler(customSuccessHandler)
+                .failureUrl("/login?error=true");
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+        authManagerBuilder.authenticationProvider(activeDirectoryLdapAuthenticationProvider()).userDetailsService(userDetailsService());
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        return new ProviderManager(Arrays.asList(activeDirectoryLdapAuthenticationProvider()));
+    }
+
+    @Bean
+    public AuthenticationProvider activeDirectoryLdapAuthenticationProvider() {
+
+        ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider(LDAP_DOMAIN, LDAP_URL, LDAP_SEARCHBASE);
+        provider.setSearchFilter("(&(objectClass=user)(userPrincipalName={0})" + LDAP_FILTER + ")");
+        provider.setConvertSubErrorCodesToExceptions(true);
+        provider.setUseAuthenticationRequestCredentials(true);
+        logger.info("LDAP_FILTER - (&(objectClass=user)(userPrincipalName={0})" + LDAP_FILTER + ")");
+        return provider;
+    }
+
+}

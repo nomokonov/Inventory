@@ -1,0 +1,36 @@
+.bg-gray{
+    background-color:#eee;
+}
+
+.my-btn-primary {
+    color: #fff;
+    background-color: #275d8d;
+    border-color: #0062cc;
+
+    background-image: linear-gradient(to bottom,  rgba(255,255,255,0.3) , rgba(0,0,0,0.05));
+    background-repeat: repeat-x;
+}
+
+.my-link{
+    color:#aaa;
+}
+.my-link:hover{
+    color:#fff;
+}
+.my-active :enabled {
+    border:  black solid;
+}
+.sidebar {
+
+    height: 100vh;
+
+}
+
+
+.my-br-top{
+    border-radius: 4pt 4pt 0pt 0pt  !important;
+}
+.my-br-bottom{
+    border-radius:  0pt 0pt 4pt 4pt  !important;
+}
+
