@@ -22,8 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-    @Autowired
-    private CustomSuccessHandler customSuccessHandler;
+    private final CustomSuccessHandler customSuccessHandler;
 
     @Value("${config.ldap-searchbase}")
     public String LDAP_SEARCHBASE;
@@ -42,6 +41,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${config.ldap-usergroup}")
     public String LDAP_USERGROUP;
+
+    @Autowired
+    public WebSecurityConfig(CustomSuccessHandler customSuccessHandler) {
+        this.customSuccessHandler = customSuccessHandler;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -69,12 +73,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationProvider activeDirectoryLdapAuthenticationProvider() {
 
+        ConfigPrint();
         ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider(LDAP_DOMAIN, LDAP_URL, LDAP_SEARCHBASE);
         provider.setSearchFilter("(&(objectClass=user)(userPrincipalName={0})" + LDAP_FILTER + ")");
         provider.setConvertSubErrorCodesToExceptions(true);
         provider.setUseAuthenticationRequestCredentials(true);
-        logger.info("LDAP_FILTER - (&(objectClass=user)(userPrincipalName={0})" + LDAP_FILTER + ")");
+
         return provider;
+    }
+
+    private void ConfigPrint(){
+        logger.info("LDAP_SEARCHBASE = " + LDAP_SEARCHBASE);
+        logger.info("LDAP_DOMAIN =     " + LDAP_DOMAIN);
+        logger.info("LDAP_URL =        " + LDAP_URL);
+        logger.info("LDAP_ADMINGROUP = " + LDAP_ADMINGROUP);
+        logger.info("LDAP_USERGROUP =  " + LDAP_USERGROUP);
+        logger.info("LDAP_FILTER =     (&(objectClass=user)(userPrincipalName={0})" + LDAP_FILTER + ")");
     }
 
 }
