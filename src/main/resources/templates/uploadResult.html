@@ -1,0 +1,21 @@
+<div th:include="common :: header"></div>
+
+<div th:replace="common :: topnavbar"></div>
+
+<div class="container-fluid ">
+
+Description: <span th:utext="${description}"></span>
+<br/>
+<h3>Uploaded Files:</h3>
+
+<ul th:each="file : ${uploadedFiles}">
+    <li th:utext="${file}"></li>
+</ul>
+
+<h3>Failed:</h3>
+<ul th:each="file : ${failedFiles}">
+    <li style="color:red;" th:utext="${file}"></li>
+</ul>
+</div>
+
+<div th:include="common :: footer"></div>

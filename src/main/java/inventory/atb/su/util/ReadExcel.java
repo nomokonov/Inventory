@@ -1,0 +1,90 @@
+package inventory.atb.su.util;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Row;
+
+public class ReadExcel {
+
+    public static void ReadFromFile(String fileName) throws IOException {
+        // Read XSL file
+        FileInputStream inputStream = new FileInputStream(new File(fileName));
+
+        // Get the workbook instance for XLS file
+        HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+
+        // Get first sheet from the workbook
+        HSSFSheet sheet = workbook.getSheetAt(0);
+
+        // Get iterator to all the rows in current sheet
+        Iterator<Row> rowIterator = sheet.iterator();
+        Row row = rowIterator.next();
+        Iterator<Cell> cellIterator =   row.cellIterator();
+
+        while (cellIterator.hasNext()) {
+            Cell cell = cellIterator.next();
+            System.out.print(cell.getColumnIndex() + "\t");
+            System.out.print(cell.getStringCellValue());
+            System.out.println("");
+        }
+
+        while (rowIterator.hasNext()) {
+            row = rowIterator.next();
+            // Get iterator to all cells of current row
+             cellIterator = row.cellIterator();
+
+            while (cellIterator.hasNext()) {
+                Cell  cell = cellIterator.next();
+
+                // Change to getCellType() if using POI 4.x
+                CellType cellType = cell.getCellType();
+//                        getCellTypeEnum();
+                switch (cellType) {
+                    case _NONE:
+                        System.out.print("");
+                        System.out.print("\t");
+                        break;
+                    case BOOLEAN:
+                        System.out.print(cell.getBooleanCellValue());
+                        System.out.print("\t");
+                        break;
+                    case BLANK:
+                        System.out.print("");
+                        System.out.print("\t");
+                        break;
+                    case FORMULA:
+                        // Formula
+//                        System.out.print(cell.getCellFormula());
+//                        System.out.print("\t");
+                        FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+                        // Print out value evaluated by formula
+                        System.out.print(evaluator.evaluate(cell).getNumberValue());
+                        break;
+                    case NUMERIC:
+                        System.out.print(cell.getNumericCellValue());
+                        System.out.print("\t");
+                        break;
+                    case STRING:
+                        System.out.print(cell.getStringCellValue());
+                        System.out.print("\t");
+                        break;
+                    case ERROR:
+                        System.out.print("!");
+                        System.out.print("\t");
+                        break;
+                }
+
+            }
+            System.out.println("");
+        }
+    }
+}

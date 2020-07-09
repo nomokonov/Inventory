@@ -7,18 +7,33 @@
             Create TABLES ;
         </comment>
         <sql>
-            CREATE TABLE films (
-            code        char(5) CONSTRAINT firstkey PRIMARY KEY,
-            title       varchar(40) NOT NULL,
-            did         integer NOT NULL,
-            date_prod   date,
-            kind        varchar(10),
-            len         interval hour to minute
+            CREATE TABLE fromexcel (
+                id SERIAL PRIMARY KEY,
+                name varchar,
+                inv_number varchar,
+                quantity integer,
+                unit varchar,
+                start_date date,
+                price numeric,
+                type_TMC varchar,
+                type_utilize varchar,
+                code_group varchar,
+                name_group varchar,
+                MOL	varchar,
+                code_department varchar,
+                name_department varchar,
+                locations varchar,
+                non_system boolean,
+                date_creation  date,
+                date_postings date,
+                date_exploit date,
+                date_closin date,
+                old_inv_number varchar
             );
 
         </sql>
         <rollback>
-            DROP DATABASE inventory;
+            DROP TABLE fromexcel;
         </rollback>
     </changeSet>
 </databaseChangeLog>

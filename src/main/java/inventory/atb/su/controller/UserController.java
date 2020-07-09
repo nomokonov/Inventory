@@ -7,7 +7,7 @@ import java.security.Principal;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class UserController {
 
 	@GetMapping("/user")
 	public String welcome(
