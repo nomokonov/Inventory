@@ -6,14 +6,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
+import inventory.atb.su.repository.FromExcelDataRepository;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReadExcel {
+    @Autowired
+    private static FromExcelDataRepository fromExcelDataRepository;
 
     public static void ReadFromFile(String fileName) throws IOException {
         // Read XSL file
