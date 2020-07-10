@@ -26,16 +26,9 @@ public class ReadExcel {
 
     public static List<FromExcelData> ReadFromFile(String fileName) throws IOException {
         List<FromExcelData> listfromExcelData = new ArrayList<>();
-        // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(fileName));
-
-        // Get the workbook instance for XLS file
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-
-        // Get first sheet from the workbook
         XSSFSheet sheet = workbook.getSheetAt(0);
-
-        // Get iterator to all the rows in current sheet
         Iterator<Row> rowIterator = sheet.iterator();
         Row row = rowIterator.next();
         Iterator<Cell> cellIterator = row.cellIterator();

@@ -51,11 +51,13 @@ public class AdminController {
         ArrayList<String> failedFiles = new ArrayList<String>();
         MyUploadForm.doUpload(request.getServletContext().getRealPath("upload"), myUploadForm.getFileDatas(), uploadedFiles, failedFiles);
         model.addAttribute("uploadedFiles", uploadedFiles);
+
         if (myUploadForm.getClear_table()) {
             fromExcelDataRepository.deleteAll();
         }
         List<FromExcelData> fromExcelDataList = ReadExcel.ReadFromFile(uploadedFiles.get(0).getAbsolutePath());
         fromExcelDataRepository.saveAll(fromExcelDataList);
+        model.addAttribute("obj_count", fromExcelDataList.size());
         model.addAttribute("failedFiles", failedFiles);
         return "uploadResult";
     }
