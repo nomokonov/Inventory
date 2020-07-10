@@ -6,7 +6,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "fromexcel")
 public class FromExcelData {
-//    1	Наименование
+    //    1	Наименование
 //  2	Инв. №
 //  3	Кол -во
 //  4	Ед. из мер
@@ -33,7 +33,6 @@ public class FromExcelData {
     private String inv_number;
     private Integer quantity;
     private String unit;
-    private Date start_date;
     private Double price;
     private String type_TMC;
     private String type_utilize;
@@ -47,11 +46,14 @@ public class FromExcelData {
     private Date date_creation;
     private Date date_postings;
     private Date date_exploit;
-    private Date  date_closin;
+    private Date date_closin;
     private String old_inv_number;
 
+    protected FromExcelData() {
+    }
+
     public FromExcelData(String name, String inv_number, Integer quantity, String unit,
-                         Date start_date, Double price, String type_TMC, String type_utilize,
+                         Double price, String type_TMC, String type_utilize,
                          String code_group, String name_group, String MOL, String code_department,
                          String name_department, String locations, Boolean non_system, Date date_creation,
                          Date date_postings, Date date_exploit, Date date_closin, String old_inv_number) {
@@ -59,7 +61,6 @@ public class FromExcelData {
         this.inv_number = inv_number;
         this.quantity = quantity;
         this.unit = unit;
-        this.start_date = start_date;
         this.price = price;
         this.type_TMC = type_TMC;
         this.type_utilize = type_utilize;
@@ -74,6 +75,40 @@ public class FromExcelData {
         this.date_postings = date_postings;
         this.date_exploit = date_exploit;
         this.date_closin = date_closin;
+        this.old_inv_number = old_inv_number;
+    }
+
+//    public FromExcelData(String name, String inv_number, double quantity, String unit,
+//                         double price, String type_TMC, String type_utilize,
+//                         String code_group, String name_group, String MOL, String code_department,
+//                         String name_department, String locations, String non_system, java.util.Date date_creation,
+//                         java.util.Date date_postings, java.util.Date date_exploit, java.util.Date date_closin, String old_inv_number) {
+//
+//    }
+
+    public FromExcelData(String name, String inv_number, double quantity, String unit,
+                         double price, String type_TMC, String type_utilize,
+                         String code_group, String name_group, String MOL, String code_department,
+                         String name_department, String locations, String non_system, java.util.Date date_creation,
+                         java.util.Date date_postings, java.util.Date date_exploit, java.util.Date date_closin, String old_inv_number) {
+        this.name = name;
+        this.inv_number = inv_number;
+        this.quantity = Double.valueOf(quantity).intValue();
+        this.unit = unit;
+        this.price = price;
+        this.type_TMC = type_TMC;
+        this.type_utilize = type_utilize;
+        this.code_group = code_group;
+        this.name_group = name_group;
+        this.MOL = MOL;
+        this.code_department = code_department;
+        this.name_department = name_department;
+        this.locations = locations;
+        this.non_system = non_system.toUpperCase().equals("ДА") ? true : false;
+        this.date_creation = date_creation!= null ? new Date(date_creation.getTime()): null;
+        this.date_postings = date_postings!= null ? new Date(date_postings.getTime()): null;
+        this.date_exploit = date_exploit!= null ? new Date(date_exploit.getTime()): null;
+        this.date_closin = date_closin!= null ? new Date( date_closin.getTime()) : null;
         this.old_inv_number = old_inv_number;
     }
 
@@ -107,14 +142,6 @@ public class FromExcelData {
 
     public void setUnit(String unit) {
         this.unit = unit;
-    }
-
-    public Date getStart_date() {
-        return start_date;
-    }
-
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
     }
 
     public Double getPrice() {

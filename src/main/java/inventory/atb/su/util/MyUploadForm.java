@@ -8,17 +8,17 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 public class MyUploadForm {
-    private String description;
+    private boolean clear_table;
 
     // Upload files.
     private MultipartFile[] fileDatas;
 
-    public String getDescription() {
-        return description;
+    public boolean getClear_table() {
+        return clear_table;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setClear_table(boolean clear_table) {
+        this.clear_table = clear_table;
     }
 
     public MultipartFile[] getFileDatas() {

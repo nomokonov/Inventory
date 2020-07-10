@@ -12,7 +12,8 @@
 
             <form th:object="${myUploadForm}" method="POST"
                   th:action="@{/admin/uploadFile}" enctype="multipart/form-data">
-                Выберете файл с данными в формате *.xlsx: <input th:field="*{fileDatas}" type="file"/>
+                Выберете файл с данными в формате *.xlsx: <input th:field="*{fileDatas}" type="file"/><br/>
+                Очистить предыдущие данные <input type="checkbox" name="clear_table">
                 <br/>
                 <input type="submit" value="Upload">
             </form>

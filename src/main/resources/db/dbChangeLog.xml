@@ -13,7 +13,6 @@
                 inv_number varchar,
                 quantity integer,
                 unit varchar,
-                start_date date,
                 price numeric,
                 type_TMC varchar,
                 type_utilize varchar,

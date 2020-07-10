@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import inventory.atb.su.models.FromExcelData;
 import inventory.atb.su.repository.FromExcelDataRepository;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -13,26 +16,29 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReadExcel {
-    @Autowired
-    private static FromExcelDataRepository fromExcelDataRepository;
+//    @Autowired
+//    private static FromExcelDataRepository fromExcelDataRepository;
 
-    public static void ReadFromFile(String fileName) throws IOException {
+    public static List<FromExcelData> ReadFromFile(String fileName) throws IOException {
+        List<FromExcelData> listfromExcelData = new ArrayList<>();
         // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(fileName));
 
         // Get the workbook instance for XLS file
-        HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 
         // Get first sheet from the workbook
-        HSSFSheet sheet = workbook.getSheetAt(0);
+        XSSFSheet sheet = workbook.getSheetAt(0);
 
         // Get iterator to all the rows in current sheet
         Iterator<Row> rowIterator = sheet.iterator();
         Row row = rowIterator.next();
-        Iterator<Cell> cellIterator =   row.cellIterator();
+        Iterator<Cell> cellIterator = row.cellIterator();
 
         while (cellIterator.hasNext()) {
             Cell cell = cellIterator.next();
@@ -44,51 +50,32 @@ public class ReadExcel {
         while (rowIterator.hasNext()) {
             row = rowIterator.next();
             // Get iterator to all cells of current row
-             cellIterator = row.cellIterator();
-
-            while (cellIterator.hasNext()) {
-                Cell  cell = cellIterator.next();
-
-                // Change to getCellType() if using POI 4.x
-                CellType cellType = cell.getCellType();
-//                        getCellTypeEnum();
-                switch (cellType) {
-                    case _NONE:
-                        System.out.print("");
-                        System.out.print("\t");
-                        break;
-                    case BOOLEAN:
-                        System.out.print(cell.getBooleanCellValue());
-                        System.out.print("\t");
-                        break;
-                    case BLANK:
-                        System.out.print("");
-                        System.out.print("\t");
-                        break;
-                    case FORMULA:
-                        // Formula
-//                        System.out.print(cell.getCellFormula());
-//                        System.out.print("\t");
-                        FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-                        // Print out value evaluated by formula
-                        System.out.print(evaluator.evaluate(cell).getNumberValue());
-                        break;
-                    case NUMERIC:
-                        System.out.print(cell.getNumericCellValue());
-                        System.out.print("\t");
-                        break;
-                    case STRING:
-                        System.out.print(cell.getStringCellValue());
-                        System.out.print("\t");
-                        break;
-                    case ERROR:
-                        System.out.print("!");
-                        System.out.print("\t");
-                        break;
-                }
-
-            }
-            System.out.println("");
+            cellIterator = row.cellIterator();
+            FromExcelData fromExcelData = new FromExcelData(
+                    row.getCell(1).getStringCellValue(), // 1	Наименование
+                    row.getCell(2).getStringCellValue(), // 2	Инв. №
+                    row.getCell(3).getNumericCellValue(), // 3	Кол -во
+                    row.getCell(4).getStringCellValue(),// 4	Ед. из мер
+                    row.getCell(5).getNumericCellValue(), // 5	Цена
+                    row.getCell(11).getStringCellValue(), // 11	Тип ТМЦ
+                    row.getCell(12).getStringCellValue(), // 12	Вид испо льзов
+                    row.getCell(13).getStringCellValue(), // 13	Код группы
+                    row.getCell(14).getStringCellValue(), // 14	Наимен группы
+                    row.getCell(15).getStringCellValue(), // 15	МОЛ
+                    row.getCell(16).getStringCellValue(), // 16	Код подр.
+                    row.getCell(17).getStringCellValue(), // 17	Подраз деление
+                    row.getCell(18).getStringCellValue(), // 18	Место нахож дение
+                    row.getCell(22).getStringCellValue(), // 22	Вне сист учет
+                    row.getCell(23).getDateCellValue(), // 23	Дата соз дания
+                    row.getCell(24).getDateCellValue(), // 24	Дата опри ходов
+                    row.getCell(25).getDateCellValue(), // 25	Дата ввода в экспл
+                    row.getCell(26).getDateCellValue(), //26	Дата списания
+                    row.getCell(47).getStringCellValue() //47	Старый инв. №
+            );
+            listfromExcelData.add(fromExcelData);
+//            fromExcelDataRepository.save(fromExcelData);
         }
+        return listfromExcelData;
     }
 }
+
