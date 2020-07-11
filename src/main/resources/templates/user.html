@@ -8,23 +8,39 @@
             <div th:replace="common :: leftnavbar"></div>
 
         </div>
-        <div class="col pt-4">
 
-            <h1>User page</h1>
-            <br>
-            <div th:text="|Hello! My dear friend, ${user.name}!|"></div>
-            <!--<div sec:authorize="hasAuthority('Access_Disable')">Text visible to Access_Disable.</div>-->
-            <!--<div sec:authorize="hasAuthority('Access_Enable')">Text visible to Access_Enable.</div>-->
-            <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">Text visible to Access_Disable.</div>
-            <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-usergroup'))}">Text visible to Access_Enable.</div>
-            Authenticated username:
-            <div sec:authentication="name"></div>
-            Authenticated user roles:
-            <div sec:authentication="principal.authorities"></div>
-            User details:
-            <div th:text="${user}"></div>
+            <h3>Список имущества:</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <button class="btn btn-primary" onclick="newTasksCreate()">Новая задача</button>
+                </div>
+            </div>
+            <table class="table table-hover table-fixed" id="user-tasks-table" width="0%">
+                <thead id="thead-table-user-tasks">
+                <tr class="head-table">
+                    <th width="22%">Инв. №</th>
+                    <th width="8%">Наименование</th>
+                    <th width="8%">Вид использ.</th>
+                    <th>Имя группы</th>
+                    <th>Подразделение</th>
+                    <th>Внесистемный</th>
+                    <th>Дата постан.</th>
+                </tr>
+                </thead>
 
-        </div>
+                <tbody id="table-body">
+                <tr style="cursor: pointer; " th:each="item : ${dataList}"  >
+                    <td th:text="${item.invNumber}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.typeUtilize}"></td>
+                    <td th:text="${item.nameGroup}"></td>
+                    <td th:text="${item.nameDepartment}"></td>
+                    <td th:text="${item.nonSystem}"></td>
+                    <td ><span th:if="${item.datePostings != null}" th:text="${#temporals.format(item.datePostings,'dd.MM.yyyy')}"></span></td>
+                </tr>
+
+                </tbody>
+            </table>
     </div>
 </div>
 

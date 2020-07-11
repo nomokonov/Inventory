@@ -16,10 +16,12 @@
     </header>
     <body class="bg-gray">
 
+
 </header>
 
 <nav class="navbar sticky-top navbar-dark bg-dark" th:fragment="topnavbar">
     <a class="navbar-brand flex-left" Style="color:#aaa" href="/">Inventory list</a>
+    <div class="nav-link my-link flex-right" th:text="'Вы вошли как, ' + ${user.name} + ' | ' + ${user.principal.Dn}"></div>
     <a class="nav-link my-link flex-right" href="/logout">Logout</a>
 </nav>
 
@@ -30,8 +32,6 @@
         <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">
             <a href="/admin/" class="list-group-item list-group-item-action  rounded-0 border-0 "
                th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/')}? active">Admin</a>
-            <a href="/static/rest_client.html" class="list-group-item list-group-item-action  rounded-0 border-0 ">REST
-                Client</a>
         </div>
         <a href="/user/" class="list-group-item list-group-item-action rounded-0 border-0"
            th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/user/')}? active"
@@ -43,9 +43,9 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"-->
+<!--            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
+<!--            crossorigin="anonymous"></script>-->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <!--my script-->
     <script src="/static/js/script.js"></script>

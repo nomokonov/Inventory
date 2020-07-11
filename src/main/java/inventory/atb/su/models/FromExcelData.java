@@ -7,109 +7,120 @@ import java.sql.Date;
 @Table(name = "fromexcel")
 public class FromExcelData {
     //    1	Наименование
-//  2	Инв. №
-//  3	Кол -во
-//  4	Ед. из мер
-//  5	Цена
-//  11	Тип ТМЦ
-//  12	Вид испо льзов
-//  13	Код группы
-//  14	Наимен группы
-//  15	МОЛ
-//  16	Код подр.
-//  17	Подраз деление
-//  18	Место нахож дение
-//  22	Вне сист учет
-//  23	Дата соз дания
-//  24	Дата опри ходов
-//  25	Дата ввода в экспл
-//  26	Дата списания
-//  47	Старый инв. №
+    //  2	Инв. №
+    //  3	Кол -во
+    //  4	Ед. из мер
+    //  5	Цена
+    //  11	Тип ТМЦ
+    //  12	Вид испо льзов
+    //  13	Код группы
+    //  14	Наимен группы
+    //  15	МОЛ
+    //  16	Код подр.
+    //  17	Подраз деление
+    //  18	Место нахож дение
+    //  22	Вне сист учет
+    //  23	Дата соз дания
+    //  24	Дата опри ходов
+    //  25	Дата ввода в экспл
+    //  26	Дата списания
+    //  47	Старый инв. №
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
+    @Column(name = "name")
     private String name;
-    private String inv_number;
+    @Column(name = "invnumber")
+    private String invNumber;
+    @Column(name = "quantity")
     private Integer quantity;
+    @Column(name = "unit")
     private String unit;
+    @Column(name = "price")
     private Double price;
-    private String type_TMC;
-    private String type_utilize;
-    private String code_group;
-    private String name_group;
-    private String MOL;
-    private String code_department;
-    private String name_department;
+    @Column(name = "typetmc")
+    private String typeTMC;
+    @Column(name = "typeutilize")
+    private String typeUtilize;
+    @Column(name = "codegroup")
+    private String codeGroup;
+    @Column(name = "namegroup")
+    private String nameGroup;
+    @Column(name = "MOL")
+    private String mol;
+    @Column(name = "codedepartment")
+    private String codeDepartment;
+    @Column(name = "namedepartment")
+    private String nameDepartment;
+    @Column(name = "locations")
     private String locations;
-    private Boolean non_system;
-    private Date date_creation;
-    private Date date_postings;
-    private Date date_exploit;
-    private Date date_closin;
-    private String old_inv_number;
+    @Column(name = "nonsystem")
+    private Boolean nonSystem;
+    @Column(name = "datecreation")
+    private Date dateCreation;
+    @Column(name = "datepostings")
+    private Date datePostings;
+    @Column(name = "dateexploit")
+    private Date dateExploit;
+    @Column(name = "dateclosin")
+    private Date dateClosin;
+    @Column(name = "oldinvnumber")
+    private String oldInvNumber;
 
     protected FromExcelData() {
     }
 
-    public FromExcelData(String name, String inv_number, Integer quantity, String unit,
-                         Double price, String type_TMC, String type_utilize,
-                         String code_group, String name_group, String MOL, String code_department,
-                         String name_department, String locations, Boolean non_system, Date date_creation,
-                         Date date_postings, Date date_exploit, Date date_closin, String old_inv_number) {
+    public FromExcelData(String name, String invNumber, Integer quantity, String unit,
+                         Double price, String typeTMC, String typeUtilize,
+                         String codeGroup, String nameGroup, String mol, String codeDepartment,
+                         String nameDepartment, String locations, Boolean nonSystem, Date dateCreation,
+                         Date datePostings, Date dateExploit, Date dateClosin, String oldInvNumber) {
         this.name = name;
-        this.inv_number = inv_number;
+        this.invNumber = invNumber;
         this.quantity = quantity;
         this.unit = unit;
         this.price = price;
-        this.type_TMC = type_TMC;
-        this.type_utilize = type_utilize;
-        this.code_group = code_group;
-        this.name_group = name_group;
-        this.MOL = MOL;
-        this.code_department = code_department;
-        this.name_department = name_department;
+        this.typeTMC = typeTMC;
+        this.typeUtilize = typeUtilize;
+        this.codeGroup = codeGroup;
+        this.nameGroup = nameGroup;
+        this.mol = mol;
+        this.codeDepartment = codeDepartment;
+        this.nameDepartment = nameDepartment;
         this.locations = locations;
-        this.non_system = non_system;
-        this.date_creation = date_creation;
-        this.date_postings = date_postings;
-        this.date_exploit = date_exploit;
-        this.date_closin = date_closin;
-        this.old_inv_number = old_inv_number;
+        this.nonSystem = nonSystem;
+        this.dateCreation = dateCreation;
+        this.datePostings = datePostings;
+        this.dateExploit = dateExploit;
+        this.dateClosin = dateClosin;
+        this.oldInvNumber = oldInvNumber;
     }
 
-//    public FromExcelData(String name, String inv_number, double quantity, String unit,
-//                         double price, String type_TMC, String type_utilize,
-//                         String code_group, String name_group, String MOL, String code_department,
-//                         String name_department, String locations, String non_system, java.util.Date date_creation,
-//                         java.util.Date date_postings, java.util.Date date_exploit, java.util.Date date_closin, String old_inv_number) {
-//
-//    }
-
-    public FromExcelData(String name, String inv_number, double quantity, String unit,
-                         double price, String type_TMC, String type_utilize,
-                         String code_group, String name_group, String MOL, String code_department,
-                         String name_department, String locations, String non_system, java.util.Date date_creation,
-                         java.util.Date date_postings, java.util.Date date_exploit, java.util.Date date_closin, String old_inv_number) {
+    public FromExcelData(String name, String invNumber, double quantity, String unit,
+                         double price, String typeTMC, String typeUtilize,
+                         String codeGroup, String nameGroup, String mol, String codeDepartment,
+                         String nameDepartment, String locations, String nonSystem, java.util.Date dateCreation,
+                         java.util.Date datePostings, java.util.Date dateExploit, java.util.Date dateClosin, String oldInvNumber) {
         this.name = name;
-        this.inv_number = inv_number;
+        this.invNumber = invNumber;
         this.quantity = Double.valueOf(quantity).intValue();
         this.unit = unit;
         this.price = price;
-        this.type_TMC = type_TMC;
-        this.type_utilize = type_utilize;
-        this.code_group = code_group;
-        this.name_group = name_group;
-        this.MOL = MOL;
-        this.code_department = code_department;
-        this.name_department = name_department;
+        this.typeTMC = typeTMC;
+        this.typeUtilize = typeUtilize;
+        this.codeGroup = codeGroup;
+        this.nameGroup = nameGroup;
+        this.mol = mol;
+        this.codeDepartment = codeDepartment;
+        this.nameDepartment = nameDepartment;
         this.locations = locations;
-        this.non_system = non_system.toUpperCase().equals("ДА") ? true : false;
-        this.date_creation = date_creation!= null ? new Date(date_creation.getTime()): null;
-        this.date_postings = date_postings!= null ? new Date(date_postings.getTime()): null;
-        this.date_exploit = date_exploit!= null ? new Date(date_exploit.getTime()): null;
-        this.date_closin = date_closin!= null ? new Date( date_closin.getTime()) : null;
-        this.old_inv_number = old_inv_number;
+        this.nonSystem = nonSystem.toUpperCase().equals("ДА") ? true : false;
+        this.dateCreation = dateCreation != null ? new Date(dateCreation.getTime()): null;
+        this.datePostings = datePostings != null ? new Date(datePostings.getTime()): null;
+        this.dateExploit = dateExploit != null ? new Date(dateExploit.getTime()): null;
+        this.dateClosin = dateClosin != null ? new Date( dateClosin.getTime()) : null;
+        this.oldInvNumber = oldInvNumber;
     }
 
     public String getName() {
@@ -120,12 +131,12 @@ public class FromExcelData {
         this.name = name;
     }
 
-    public String getInv_number() {
-        return inv_number;
+    public String getInvNumber() {
+        return invNumber;
     }
 
-    public void setInv_number(String inv_number) {
-        this.inv_number = inv_number;
+    public void setInvNumber(String invNumber) {
+        this.invNumber = invNumber;
     }
 
     public Integer getQuantity() {
@@ -152,60 +163,60 @@ public class FromExcelData {
         this.price = price;
     }
 
-    public String getType_TMC() {
-        return type_TMC;
+    public String getTypeTMC() {
+        return typeTMC;
     }
 
-    public void setType_TMC(String type_TMC) {
-        this.type_TMC = type_TMC;
+    public void setTypeTMC(String typeTMC) {
+        this.typeTMC = typeTMC;
     }
 
-    public String getType_utilize() {
-        return type_utilize;
+    public String getTypeUtilize() {
+        return typeUtilize;
     }
 
-    public void setType_utilize(String type_utilize) {
-        this.type_utilize = type_utilize;
+    public void setTypeUtilize(String typeUtilize) {
+        this.typeUtilize = typeUtilize;
     }
 
-    public String getCode_group() {
-        return code_group;
+    public String getCodeGroup() {
+        return codeGroup;
     }
 
-    public void setCode_group(String code_group) {
-        this.code_group = code_group;
+    public void setCodeGroup(String codeGroup) {
+        this.codeGroup = codeGroup;
     }
 
-    public String getName_group() {
-        return name_group;
+    public String getNameGroup() {
+        return nameGroup;
     }
 
-    public void setName_group(String name_group) {
-        this.name_group = name_group;
+    public void setNameGroup(String nameGroup) {
+        this.nameGroup = nameGroup;
     }
 
-    public String getMOL() {
-        return MOL;
+    public String getMol() {
+        return mol;
     }
 
-    public void setMOL(String MOL) {
-        this.MOL = MOL;
+    public void setMol(String mol) {
+        this.mol = mol;
     }
 
-    public String getCode_department() {
-        return code_department;
+    public String getCodeDepartment() {
+        return codeDepartment;
     }
 
-    public void setCode_department(String code_department) {
-        this.code_department = code_department;
+    public void setCodeDepartment(String codeDepartment) {
+        this.codeDepartment = codeDepartment;
     }
 
-    public String getName_department() {
-        return name_department;
+    public String getNameDepartment() {
+        return nameDepartment;
     }
 
-    public void setName_department(String name_department) {
-        this.name_department = name_department;
+    public void setNameDepartment(String nameDepartment) {
+        this.nameDepartment = nameDepartment;
     }
 
     public String getLocations() {
@@ -216,51 +227,51 @@ public class FromExcelData {
         this.locations = locations;
     }
 
-    public Boolean getNon_system() {
-        return non_system;
+    public Boolean getNonSystem() {
+        return nonSystem;
     }
 
-    public void setNon_system(Boolean non_system) {
-        this.non_system = non_system;
+    public void setNonSystem(Boolean nonSystem) {
+        this.nonSystem = nonSystem;
     }
 
-    public Date getDate_creation() {
-        return date_creation;
+    public Date getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDate_creation(Date date_creation) {
-        this.date_creation = date_creation;
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public Date getDate_postings() {
-        return date_postings;
+    public Date getDatePostings() {
+        return datePostings;
     }
 
-    public void setDate_postings(Date date_postings) {
-        this.date_postings = date_postings;
+    public void setDatePostings(Date datePostings) {
+        this.datePostings = datePostings;
     }
 
-    public Date getDate_exploit() {
-        return date_exploit;
+    public Date getDateExploit() {
+        return dateExploit;
     }
 
-    public void setDate_exploit(Date date_exploit) {
-        this.date_exploit = date_exploit;
+    public void setDateExploit(Date dateExploit) {
+        this.dateExploit = dateExploit;
     }
 
-    public Date getDate_closin() {
-        return date_closin;
+    public Date getDateClosin() {
+        return dateClosin;
     }
 
-    public void setDate_closin(Date date_closin) {
-        this.date_closin = date_closin;
+    public void setDateClosin(Date dateClosin) {
+        this.dateClosin = dateClosin;
     }
 
-    public String getOld_inv_number() {
-        return old_inv_number;
+    public String getOldInvNumber() {
+        return oldInvNumber;
     }
 
-    public void setOld_inv_number(String old_inv_number) {
-        this.old_inv_number = old_inv_number;
+    public void setOldInvNumber(String oldInvNumber) {
+        this.oldInvNumber = oldInvNumber;
     }
 }

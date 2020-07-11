@@ -10,24 +10,24 @@
             CREATE TABLE fromexcel (
                 id SERIAL PRIMARY KEY,
                 name varchar,
-                inv_number varchar,
+                invNumber varchar,
                 quantity integer,
                 unit varchar,
                 price numeric,
-                type_TMC varchar,
-                type_utilize varchar,
-                code_group varchar,
-                name_group varchar,
+                typeTMC varchar,
+                typeUtilize varchar,
+                codeGroup varchar,
+                nameGroup varchar,
                 MOL	varchar,
-                code_department varchar,
-                name_department varchar,
+                codeDepartment varchar,
+                nameDepartment varchar,
                 locations varchar,
-                non_system boolean,
-                date_creation  date,
-                date_postings date,
-                date_exploit date,
-                date_closin date,
-                old_inv_number varchar
+                nonSystem boolean,
+                dateCreation  date,
+                datePostings date,
+                dateExploit date,
+                dateClosin date,
+                oldInvNumber varchar
             );
 
         </sql>
