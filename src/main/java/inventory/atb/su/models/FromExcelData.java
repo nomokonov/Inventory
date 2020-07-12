@@ -1,7 +1,7 @@
 package inventory.atb.su.models;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "fromexcel")
@@ -58,13 +58,13 @@ public class FromExcelData {
     @Column(name = "nonsystem")
     private Boolean nonSystem;
     @Column(name = "datecreation")
-    private Date dateCreation;
+    private LocalDate dateCreation;
     @Column(name = "datepostings")
-    private Date datePostings;
+    private LocalDate datePostings;
     @Column(name = "dateexploit")
-    private Date dateExploit;
+    private LocalDate dateExploit;
     @Column(name = "dateclosin")
-    private Date dateClosin;
+    private LocalDate dateClosin;
     @Column(name = "oldinvnumber")
     private String oldInvNumber;
 
@@ -74,8 +74,8 @@ public class FromExcelData {
     public FromExcelData(String name, String invNumber, Integer quantity, String unit,
                          Double price, String typeTMC, String typeUtilize,
                          String codeGroup, String nameGroup, String mol, String codeDepartment,
-                         String nameDepartment, String locations, Boolean nonSystem, Date dateCreation,
-                         Date datePostings, Date dateExploit, Date dateClosin, String oldInvNumber) {
+                         String nameDepartment, String locations, Boolean nonSystem, LocalDate dateCreation,
+                         LocalDate datePostings, LocalDate dateExploit, LocalDate dateClosin, String oldInvNumber) {
         this.name = name;
         this.invNumber = invNumber;
         this.quantity = quantity;
@@ -116,10 +116,10 @@ public class FromExcelData {
         this.nameDepartment = nameDepartment;
         this.locations = locations;
         this.nonSystem = nonSystem.toUpperCase().equals("ДА") ? true : false;
-        this.dateCreation = dateCreation != null ? new Date(dateCreation.getTime()): null;
-        this.datePostings = datePostings != null ? new Date(datePostings.getTime()): null;
-        this.dateExploit = dateExploit != null ? new Date(dateExploit.getTime()): null;
-        this.dateClosin = dateClosin != null ? new Date( dateClosin.getTime()) : null;
+        this.dateCreation = dateCreation != null ? new java.sql.Date(dateCreation.getTime()).toLocalDate(): null;
+        this.datePostings = datePostings != null ? new java.sql.Date(datePostings.getTime()).toLocalDate(): null;
+        this.dateExploit = dateExploit != null ? new java.sql.Date(dateExploit.getTime()).toLocalDate(): null;
+        this.dateClosin = dateClosin != null ? new java.sql.Date( dateClosin.getTime()).toLocalDate() : null;
         this.oldInvNumber = oldInvNumber;
     }
 
@@ -235,35 +235,35 @@ public class FromExcelData {
         this.nonSystem = nonSystem;
     }
 
-    public Date getDateCreation() {
+    public LocalDate getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(Date dateCreation) {
+    public void setDateCreation(LocalDate dateCreation) {
         this.dateCreation = dateCreation;
     }
 
-    public Date getDatePostings() {
+    public LocalDate getDatePostings() {
         return datePostings;
     }
 
-    public void setDatePostings(Date datePostings) {
+    public void setDatePostings(LocalDate datePostings) {
         this.datePostings = datePostings;
     }
 
-    public Date getDateExploit() {
+    public LocalDate getDateExploit() {
         return dateExploit;
     }
 
-    public void setDateExploit(Date dateExploit) {
+    public void setDateExploit(LocalDate dateExploit) {
         this.dateExploit = dateExploit;
     }
 
-    public Date getDateClosin() {
+    public LocalDate getDateClosin() {
         return dateClosin;
     }
 
-    public void setDateClosin(Date dateClosin) {
+    public void setDateClosin(LocalDate dateClosin) {
         this.dateClosin = dateClosin;
     }
 

@@ -1,6 +1,6 @@
 config:
   ldap-domain: "nvm.local"
-  ldap-url: "ldap://192.168.171.128:389"
+  ldap-url: "ldap://192.168.122.128:389"
   ldap-searchbase: "ou=ATB,dc=nvm,dc=local"
   ldap-filter: "(|(memberOf=cn=Inventory_admins,ou=Группы безопасности,ou=ATB,dc=nvm,dc=local)(memberOf=cn=Inventory_users,ou=Группы безопасности,ou=ATB,dc=nvm,dc=local))"
   ldap-admingroup: "Inventory_admins"

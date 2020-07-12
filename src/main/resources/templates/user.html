@@ -7,21 +7,34 @@
         <div class="col-2 p-0 ">
             <div th:replace="common :: leftnavbar"></div>
 
-        </div>
 
+        </div>
+        <div class="col pt-4">
             <h3>Список имущества:</h3>
             <div class="row">
                 <div class="col-md-3">
                     <button class="btn btn-primary" onclick="newTasksCreate()">Новая задача</button>
                 </div>
             </div>
-            <table class="table table-hover table-fixed" id="user-tasks-table" width="0%">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="mol">МОЛ</label>
+                    <input type="text" class="form-control" id="mol">
+                </div>
+                <div class="form-group">
+                    <label for="department">Email</label>
+                    <input class="form-control" id="department">
+                </div>
+                <button type="submit" class="btn btn-primary">Применить</button>
+            </form>
+
+            <table class="table table-sm table-hover table-fixed" id="user-tasks-table" width="0%">
                 <thead id="thead-table-user-tasks">
                 <tr class="head-table">
-                    <th width="22%">Инв. №</th>
-                    <th width="8%">Наименование</th>
+                    <th width="8%">Инв. №</th>
+                    <th width="20%">Наименование</th>
                     <th width="8%">Вид использ.</th>
-                    <th>Имя группы</th>
+                    <th width="20%">Имя группы</th>
                     <th>Подразделение</th>
                     <th>Внесистемный</th>
                     <th>Дата постан.</th>
@@ -29,18 +42,22 @@
                 </thead>
 
                 <tbody id="table-body">
-                <tr style="cursor: pointer; " th:each="item : ${dataList}"  >
+                <tr style="cursor: pointer; " th:each="item : ${dataList}">
                     <td th:text="${item.invNumber}"></td>
                     <td th:text="${item.name}"></td>
                     <td th:text="${item.typeUtilize}"></td>
                     <td th:text="${item.nameGroup}"></td>
                     <td th:text="${item.nameDepartment}"></td>
                     <td th:text="${item.nonSystem}"></td>
-                    <td ><span th:if="${item.datePostings != null}" th:text="${#temporals.format(item.datePostings,'dd.MM.yyyy')}"></span></td>
+                    <!--<td th:text="${item.datePostings}"></td>-->
+                    <td><span th:if="${item.datePostings != null}"
+                              th:text="${#temporals.format(item.datePostings,'dd.MM.yyyy')}"></span></td>
                 </tr>
 
                 </tbody>
             </table>
+        </div>
+
     </div>
 </div>
 

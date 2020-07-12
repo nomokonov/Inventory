@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/user")
     public String welcome(@RequestParam(defaultValue = "0") Integer page,
-						  @RequestParam(defaultValue = "10") Integer pageSize,
+						  @RequestParam(defaultValue = "20") Integer pageSize,
 						  @RequestParam(defaultValue = "name") String sortBy,
 						  @RequestParam(required = false) Optional<String> codeDepartment,
 			@AuthenticationPrincipal LdapUserDetails userDetails,
