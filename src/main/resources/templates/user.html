@@ -1,4 +1,4 @@
-<div th:include="common :: header"></div>
+<div th:replace="common :: header"></div>
 
 <div th:replace="common :: topnavbar"></div>
 
@@ -16,14 +16,21 @@
                     <button class="btn btn-primary" onclick="newTasksCreate()">Новая задача</button>
                 </div>
             </div>
-            <form class="form-inline">
+            <form class="form-inline" action="" method="GET">
                 <div class="form-group">
                     <label for="mol">МОЛ</label>
                     <input type="text" class="form-control" id="mol">
                 </div>
+                <!--<div class="form-group">-->
+                    <!--<label for="department">Email</label>-->
+                    <!--<input class="form-control" id="department" name="codeDepartment">-->
+                <!--</div>-->
                 <div class="form-group">
                     <label for="department">Email</label>
-                    <input class="form-control" id="department">
+                    <select class="form-control" id="department" ng-repeat="department in departments" name="codeDepartment">
+                        <option value="{{ department.codeDepartment }}">{{ department.nameDepartment }}</option>
+                    </select>
+
                 </div>
                 <button type="submit" class="btn btn-primary">Применить</button>
             </form>

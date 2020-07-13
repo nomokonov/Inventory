@@ -34,12 +34,12 @@ public class AdminController {
     @GetMapping("/")
     public String welcome(
             Principal user,
-            Map<String, Object> model) {
+            Model model) {
 
-        model.put("user", user);
+        model.addAttribute("user", user);
         MyUploadForm myUploadForm = new MyUploadForm();
-        model.put("myUploadForm", myUploadForm);
-        return "admin.html";
+        model.addAttribute("myUploadForm", myUploadForm);
+        return "admin";
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)

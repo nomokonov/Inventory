@@ -32,6 +32,7 @@ public class UserController {
 						  @RequestParam(defaultValue = "20") Integer pageSize,
 						  @RequestParam(defaultValue = "name") String sortBy,
 						  @RequestParam(required = false) Optional<String> codeDepartment,
+						  @RequestParam(required = false) Optional<String> name,
 			@AuthenticationPrincipal LdapUserDetails userDetails,
 			Principal user,
 			Model model) throws InvalidNameException {

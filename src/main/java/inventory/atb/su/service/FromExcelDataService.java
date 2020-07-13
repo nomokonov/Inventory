@@ -2,7 +2,9 @@ package inventory.atb.su.service;
 
 
 import inventory.atb.su.models.FromExcelData;
+import inventory.atb.su.models.dto.DepartmentDTO;
 import inventory.atb.su.repository.FromExcelDataRepository;
+import inventory.atb.su.repository.impl.DepartmentDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,10 +23,12 @@ import static org.springframework.data.jpa.domain.Specification.where;
 public class FromExcelDataService {
 
     private FromExcelDataRepository fromExcelDataRepository;
+    private DepartmentDaoImpl departmentDao;
 
     @Autowired
-    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor) {
+    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor, DepartmentDaoImpl departmentDao) {
         this.fromExcelDataRepository = fromExcelDataRepositor;
+        this.departmentDao = departmentDao;
     }
 
     public FromExcelData Save(FromExcelData fromExcelData) {
@@ -54,5 +58,10 @@ public class FromExcelDataService {
         } else {
             return new ArrayList<FromExcelData>();
         }
+    }
+
+    public List<DepartmentDTO> getAllDepartments(){
+        return departmentDao.getAllDepartments();
+
     }
 }

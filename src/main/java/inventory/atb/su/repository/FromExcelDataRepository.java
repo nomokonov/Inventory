@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FromExcelDataRepository  extends JpaRepository<FromExcelData, Long>, JpaSpecificationExecutor<FromExcelData> {
+public interface FromExcelDataRepository extends JpaRepository<FromExcelData, Long>, JpaSpecificationExecutor<FromExcelData> {
 
-//    List<FromExcelData> getAllByMOL(String mol);
 }
