@@ -22,7 +22,7 @@
                 codeDepartment varchar,
                 nameDepartment varchar,
                 locations varchar,
-                nonSystem boolean,
+                nonSystem varchar,
                 dateCreation  date,
                 datePostings date,
                 dateExploit date,

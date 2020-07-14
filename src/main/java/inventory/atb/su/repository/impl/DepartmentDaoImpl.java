@@ -23,11 +23,6 @@ public class DepartmentDaoImpl {
                         "FROM public.fromexcel " +
                         "" +
                         "GROUP BY codedepartment, namedepartment;"
-
-//                "SELECT u.user_id AS id, u.first_name AS firstName, u.last_name AS lastName FROM user u " +
-//                        "LEFT JOIN permissions p ON p.user_id = u.user_id " +
-//                        "LEFT JOIN role r ON p.role_id = r.id " +
-//                        "WHERE r.role_name = 'MENTOR';"
                 , Tuple.class)
                 .getResultList();
         for (Tuple tuple : tupleDepartmentDTO) {

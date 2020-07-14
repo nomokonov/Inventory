@@ -5,13 +5,15 @@ app.controller("InventoryListController", function($scope, $http) {
 
 
     $scope.departments = [];
-    // $scope.employeeForm = {
-    //     codeDepartment: "",
-    //     nameDepartment: ""
-    // };
+    $scope.mols = [];
+    $scope.filterForm = {
+        department: "",
+        mol: ""
+    };
 
     // Now load the data from server
-    _refreshEmployeeData();
+    _refreshFilterFormData();
+     // _clearFormData();
 
     // // HTTP POST/PUT methods for add/edit employee
     // // Call: http://localhost:8080/employee
@@ -61,7 +63,7 @@ app.controller("InventoryListController", function($scope, $http) {
     // Private Method
     // HTTP GET- get all employees collection
     // Call: http://localhost:8080/employees
-    function _refreshEmployeeData() {
+    function _refreshFilterFormData() {
         $http({
             method: 'GET',
             url: '/user/rest/departments'
@@ -73,10 +75,22 @@ app.controller("InventoryListController", function($scope, $http) {
                 console.log("Error: " + res.status + " : " + res.data);
             }
         );
+
+        $http({
+            method: 'GET',
+            url: '/user/rest/mols'
+        }).then(
+            function(res) { // success
+                $scope.mols = res.data;
+            },
+            function(res) { // error
+                console.log("Error: " + res.status + " : " + res.data);
+            }
+        );
     }
 
     function _success(res) {
-        _refreshEmployeeData();
+        _refreshFilterFormData();
         // _clearFormData();
     }
 
@@ -88,11 +102,10 @@ app.controller("InventoryListController", function($scope, $http) {
         alert("Error: " + status + ":" + data);
     }
 
-    // // Clear the form
-    // function _clearFormData() {
-    //     $scope.employeeForm.empId = -1;
-    //     $scope.employeeForm.empNo = "";
-    //     $scope.employeeForm.empName = ""
-    // };
+    // Clear the form
+    function _clearFormData() {
+        $scope.filterForm.department = "";
+        $scope.filterForm.mol = "";
+    };
 });
 

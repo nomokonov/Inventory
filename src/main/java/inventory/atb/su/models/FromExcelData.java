@@ -56,7 +56,7 @@ public class FromExcelData {
     @Column(name = "locations")
     private String locations;
     @Column(name = "nonsystem")
-    private Boolean nonSystem;
+    private String nonSystem;
     @Column(name = "datecreation")
     private LocalDate dateCreation;
     @Column(name = "datepostings")
@@ -74,7 +74,7 @@ public class FromExcelData {
     public FromExcelData(String name, String invNumber, Integer quantity, String unit,
                          Double price, String typeTMC, String typeUtilize,
                          String codeGroup, String nameGroup, String mol, String codeDepartment,
-                         String nameDepartment, String locations, Boolean nonSystem, LocalDate dateCreation,
+                         String nameDepartment, String locations, String nonSystem, LocalDate dateCreation,
                          LocalDate datePostings, LocalDate dateExploit, LocalDate dateClosin, String oldInvNumber) {
         this.name = name;
         this.invNumber = invNumber;
@@ -115,7 +115,7 @@ public class FromExcelData {
         this.codeDepartment = codeDepartment;
         this.nameDepartment = nameDepartment;
         this.locations = locations;
-        this.nonSystem = nonSystem.toUpperCase().equals("ДА") ? true : false;
+        this.nonSystem = nonSystem;
         this.dateCreation = dateCreation != null ? new java.sql.Date(dateCreation.getTime()).toLocalDate(): null;
         this.datePostings = datePostings != null ? new java.sql.Date(datePostings.getTime()).toLocalDate(): null;
         this.dateExploit = dateExploit != null ? new java.sql.Date(dateExploit.getTime()).toLocalDate(): null;
@@ -227,11 +227,11 @@ public class FromExcelData {
         this.locations = locations;
     }
 
-    public Boolean getNonSystem() {
+    public String getNonSystem() {
         return nonSystem;
     }
 
-    public void setNonSystem(Boolean nonSystem) {
+    public void setNonSystem(String nonSystem) {
         this.nonSystem = nonSystem;
     }
 

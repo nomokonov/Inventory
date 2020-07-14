@@ -16,25 +16,38 @@
                     <button class="btn btn-primary" onclick="newTasksCreate()">Новая задача</button>
                 </div>
             </div>
+            Фильтр:
             <form class="form-inline" action="" method="GET">
                 <div class="form-group">
                     <label for="mol">МОЛ</label>
-                    <input type="text" class="form-control" id="mol">
+<!--                    <input type="text" class="form-control-sm" id="mol" name="mol" ng-model="filterForm.mol" th:value="">-->
+                    <select class="form-control-sm" id="mol"
+                            name="mol"
+                            ng-model="filterForm.mol"
+                            ng-options="mol for mol in mols track by mol"
+                    >
+                    </select>
                 </div>
-                <!--<div class="form-group">-->
-                    <!--<label for="department">Email</label>-->
-                    <!--<input class="form-control" id="department" name="codeDepartment">-->
-                <!--</div>-->
                 <div class="form-group">
                     <label for="department">Email</label>
-                    <select class="form-control" id="department" ng-repeat="department in departments" name="codeDepartment">
-                        <option value="{{ department.codeDepartment }}">{{ department.nameDepartment }}</option>
+                    <select class="form-control-sm" id="department"
+                            name="codeDepartment"
+                            ng-model="filterForm.department"
+                            ng-options="department.nameDepartment for department in departments track by department.codeDepartment"
+                    >
                     </select>
 
                 </div>
-                <button type="submit" class="btn btn-primary">Применить</button>
+                <button type="submit" class=" form-control-sm btn btn-primary">Применить</button>
             </form>
-
+            <div class="row">
+                <div class="col-md-3" th:text="'Найдено:' + ${totalElements}" ></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" th:text="'Страница:' + ${page+1}"></div>
+                <div class="col-md-3" th:text="' из ' +${totalPages-1}"></div>
+                <div class="col-md-3" th:text="' Выводить по: ' + ${pageSize}"></div>
+            </div>
             <table class="table table-sm table-hover table-fixed" id="user-tasks-table" width="0%">
                 <thead id="thead-table-user-tasks">
                 <tr class="head-table">
