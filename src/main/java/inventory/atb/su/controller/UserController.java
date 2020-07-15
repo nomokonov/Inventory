@@ -41,9 +41,15 @@ public class UserController {
 		String cn = ldapService.getCN(userDetails);
 		if (mol.isPresent() && !mol.get().equals("?")){
 			cn=mol.get();
+
+
+		}
+		if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")){
+			model.addAttribute("codeDepartment",codeDepartment.get());
 		}
 
 		Page<FromExcelData> result = fromExcelDataService.getAllByMol(cn,page,pageSize,sortBy,codeDepartment);
+		model.addAttribute("mol",cn);
 		model.addAttribute("dataList",result.getContent());
 		model.addAttribute("page",result.getPageable().getPageNumber());
 		model.addAttribute("pageSize",result.getPageable().getPageSize());

@@ -13,6 +13,8 @@ app.controller("InventoryListController", function($scope, $http) {
 
     // Now load the data from server
     _refreshFilterFormData();
+
+
      // _clearFormData();
 
     // // HTTP POST/PUT methods for add/edit employee
@@ -64,6 +66,7 @@ app.controller("InventoryListController", function($scope, $http) {
     // HTTP GET- get all employees collection
     // Call: http://localhost:8080/employees
     function _refreshFilterFormData() {
+
         $http({
             method: 'GET',
             url: '/user/rest/departments'
