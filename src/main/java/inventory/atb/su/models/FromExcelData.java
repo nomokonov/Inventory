@@ -28,7 +28,7 @@ public class FromExcelData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "invnumber")
@@ -121,6 +121,14 @@ public class FromExcelData {
         this.dateExploit = dateExploit != null ? new java.sql.Date(dateExploit.getTime()).toLocalDate(): null;
         this.dateClosin = dateClosin != null ? new java.sql.Date( dateClosin.getTime()).toLocalDate() : null;
         this.oldInvNumber = oldInvNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

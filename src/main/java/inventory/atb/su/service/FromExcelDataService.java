@@ -68,4 +68,8 @@ public class FromExcelDataService {
     public List<String> getAllMols(){
         return molDao.getAllMols();
     }
+
+    public Optional<FromExcelData> getById(Long id){
+        return fromExcelDataRepository.findById(id);
+    }
 }

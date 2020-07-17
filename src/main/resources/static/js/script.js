@@ -1,8 +1,7 @@
 var app = angular.module("InventoryList", []);
 
 // Controller Part
-app.controller("InventoryListController", function($scope, $http) {
-
+app.controller("InventoryListController", function($scope, $http, $location) {
 
     $scope.departments = [];
     $scope.mols = [];
@@ -13,7 +12,10 @@ app.controller("InventoryListController", function($scope, $http) {
 
     // Now load the data from server
     _refreshFilterFormData();
-
+    // var url = $location.absUrl();
+    // var params = $location.search('mol, codeDepartment');
+    // console.log($location.search('mol'));
+// $location.search() => {foo: 'yipee', baz: 'xoxo'}
 
      // _clearFormData();
 
@@ -109,6 +111,7 @@ app.controller("InventoryListController", function($scope, $http) {
     function _clearFormData() {
         $scope.filterForm.department = "";
         $scope.filterForm.mol = "";
+
     };
 });
 

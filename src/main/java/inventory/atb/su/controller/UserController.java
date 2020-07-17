@@ -1,7 +1,7 @@
 package inventory.atb.su.controller;
 
 import inventory.atb.su.models.FromExcelData;
-import inventory.atb.su.models.filters.UserFilter;
+import inventory.atb.su.models.dto.DepartmentDTO;
 import inventory.atb.su.service.FromExcelDataService;
 import inventory.atb.su.service.LDAPService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +49,10 @@ public class UserController {
 		}
 
 		Page<FromExcelData> result = fromExcelDataService.getAllByMol(cn,page,pageSize,sortBy,codeDepartment);
+		List<DepartmentDTO> allDepartments = fromExcelDataService.getAllDepartments();
+		List<String> allMols = fromExcelDataService.getAllMols();
+		model.addAttribute("allDepartments",allDepartments);
+		model.addAttribute("allMols", allMols);
 		model.addAttribute("mol",cn);
 		model.addAttribute("dataList",result.getContent());
 		model.addAttribute("page",result.getPageable().getPageNumber());
