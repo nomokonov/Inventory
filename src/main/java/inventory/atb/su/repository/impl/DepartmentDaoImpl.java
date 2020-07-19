@@ -32,4 +32,20 @@ public class DepartmentDaoImpl {
         }
         return result;
     }
+
+    public DepartmentDTO getDepartmentByCode( String codeDepartmentP){
+        List<Tuple> resultList = entityManager.createNativeQuery(
+                "SELECT codedepartment, namedepartment " +
+                        "FROM public.fromexcel " +
+                        " WHERE codedepartment='" + codeDepartmentP + "'" +
+                        " GROUP BY codedepartment, namedepartment;"
+                , Tuple.class)
+                .getResultList();
+    if (resultList.isEmpty()){
+        return null;
+    }
+        String codeDepartment = resultList.get(0).get("codedepartment") == null ? "" : (String) resultList.get(0).get("codedepartment");
+        String nameDepartment = resultList.get(0).get("namedepartment") == null ? "" : (String) resultList.get(0).get("namedepartment");
+        return new DepartmentDTO(codeDepartment,nameDepartment);
+    }
 }

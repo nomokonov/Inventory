@@ -48,12 +48,12 @@ public class FromExcelDataService {
     public Page<FromExcelData> getAllByMol(String mol, Integer page, Integer pageSize, String sortBy, Optional<String> codeDepartment) {
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
         Specification<FromExcelData> fromExcelDataSpecification = null;
-            if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")) {
-                fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
-                        criteriaBuilder.equal(root.get("codeDepartment"), codeDepartment.get()));
-            }
-                fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
-                        criteriaBuilder.equal(root.get("mol"), mol));
+        if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")) {
+            fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("codeDepartment"), codeDepartment.get()));
+        }
+        fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("mol"), mol));
         Page<FromExcelData> pagedResult = fromExcelDataRepository.findAll(fromExcelDataSpecification, pageable);
 
         return pagedResult;
@@ -65,11 +65,26 @@ public class FromExcelDataService {
 
     }
 
-    public List<String> getAllMols(){
+    public List<String> getAllMols() {
         return molDao.getAllMols();
     }
 
-    public Optional<FromExcelData> getById(Long id){
+    public Optional<FromExcelData> getById(Long id) {
         return fromExcelDataRepository.findById(id);
+    }
+
+    public FromExcelData update(Long id, String mol, String codeDeparment) {
+        Optional<FromExcelData> fromExcelDataFromDB = fromExcelDataRepository.findById(id);
+        if (fromExcelDataFromDB.isPresent()) {
+                fromExcelDataFromDB.get().setMol(mol);
+                DepartmentDTO departmentByCode = departmentDao.getDepartmentByCode(codeDeparment);
+            fromExcelDataFromDB.get().setCodeDepartment(departmentByCode.getCodeDepartment());
+            fromExcelDataFromDB.get().setNameDepartment(departmentByCode.getNameDepartment());
+                return fromExcelDataRepository.saveAndFlush(fromExcelDataFromDB.get());
+        } else {
+            return null;
+        }
+
+
     }
 }
