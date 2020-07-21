@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/user/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')");
+        http.authorizeRequests().antMatchers("/scanning/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')");
         http.authorizeRequests().antMatchers("/admin/**").hasAuthority(LDAP_ADMINGROUP);
         http
                 .authorizeRequests()

@@ -21,8 +21,8 @@ public class DepartmentDaoImpl {
         List<Tuple> tupleDepartmentDTO = entityManager.createNativeQuery(
                 "SELECT codedepartment, namedepartment " +
                         "FROM public.fromexcel " +
-                        "" +
-                        "GROUP BY codedepartment, namedepartment;"
+                        " GROUP BY codedepartment, namedepartment " +
+                        " ORDER BY namedepartment;"
                 , Tuple.class)
                 .getResultList();
         for (Tuple tuple : tupleDepartmentDTO) {

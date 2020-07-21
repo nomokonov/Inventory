@@ -1,7 +1,7 @@
-var app = angular.module("InventoryList", []);
+var app = angular.module("InventoryList", ['ngRoute']);
 
 // Controller Part
-app.controller("InventoryListController", function($scope, $http, $location) {
+app.controller("InventoryListController", function($scope, $http, $routeParams, $location) {
 
     $scope.departments = [];
     $scope.mols = [];
@@ -12,6 +12,7 @@ app.controller("InventoryListController", function($scope, $http, $location) {
 
     // Now load the data from server
     _refreshFilterFormData();
+
     // var url = $location.absUrl();
     // var params = $location.search('mol, codeDepartment');
     // console.log($location.search('mol'));
@@ -81,6 +82,21 @@ app.controller("InventoryListController", function($scope, $http, $location) {
             }
         );
 
+// GET inventory by id
+        console.log($routeParams['invNumberId']);
+        $http({
+            method: 'GET',
+            url: '/user/rest/invnumber',
+            params: {'id':$routeParams['invNumberId']}
+        }).then(
+            function(res) { // success
+                $scope.mols = res.data;
+            },
+            function(res) { // error
+                console.log("Error: " + res.status + " : " + res.data);
+            }
+        );
+
         $http({
             method: 'GET',
             url: '/user/rest/mols'
@@ -114,4 +130,22 @@ app.controller("InventoryListController", function($scope, $http, $location) {
 
     };
 });
+
+app.config(['$routeProvider',
+    function($routeProvider) {
+        $routeProvider.
+
+        when('/users/:invNumberId', {
+            // templateUrl: ('/resources/angularjs/templates/getUser.html'),
+            controller: 'InventoryListController'
+
+        }).
+        otherwise({
+            redirectTo: '/users'
+        });
+    }]);
+
+function searchInvNumber() {
+    window.location.href='/user/' + $("#invnumber").val() + '/';
+}
 
