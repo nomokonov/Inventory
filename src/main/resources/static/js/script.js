@@ -1,8 +1,29 @@
 var app = angular.module("InventoryList", ['ngRoute']);
 
-// Controller Part
-app.controller("InventoryListController", function($scope, $http, $routeParams, $location) {
+// app.config(['$routeProvider','$locationProvider',
+//     function($routeProvider, $locationProvider) {
+//         $routeProvider.
+//
+//         when('/user/:invNumberId*', {
+//             templateUrl: ('/static/templates/invnumber.html'),
+//             controller: 'InventoryListController'
+//
+//         }).
+//         otherwise({
+//             redirectTo: '/user/'
+//         });
+//         $locationProvider.html5Mode({
+//             enabled: true,
+//             requireBase: false
+//         });
+//     }]);
+//
 
+// Controller Part
+app.controller("InventoryListController", function($scope, $http, $route, $routeParams, $location) {
+
+    // var id = $routeParams.invNumberId;
+    $scope.params = $routeParams;
     $scope.departments = [];
     $scope.mols = [];
     $scope.filterForm = {
@@ -83,11 +104,12 @@ app.controller("InventoryListController", function($scope, $http, $routeParams, 
         );
 
 // GET inventory by id
-        console.log($routeParams['invNumberId']);
+//         var invNumberId =  $routeParams['invNumberId'];
+//         console.log(params.invNumberId);
         $http({
             method: 'GET',
-            url: '/user/rest/invnumber',
-            params: {'id':$routeParams['invNumberId']}
+            url: '/user/rest/invnumber'
+            // params: {'id':params.invNumberId}
         }).then(
             function(res) { // success
                 $scope.mols = res.data;
@@ -130,22 +152,3 @@ app.controller("InventoryListController", function($scope, $http, $routeParams, 
 
     };
 });
-
-app.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.
-
-        when('/users/:invNumberId', {
-            // templateUrl: ('/resources/angularjs/templates/getUser.html'),
-            controller: 'InventoryListController'
-
-        }).
-        otherwise({
-            redirectTo: '/users'
-        });
-    }]);
-
-function searchInvNumber() {
-    window.location.href='/user/' + $("#invnumber").val() + '/';
-}
-

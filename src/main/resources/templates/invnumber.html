@@ -11,12 +11,13 @@
         <div class="col pt-4"  ng-app="InventoryList" ng-controller="InventoryListController">
             <h3>Имущество:</h3>
             <div >
-                <form class="form-inline" action="" method="GET" id="form-invnumber">
+                <form class="form-inline" th:action="'/user/find/'+${invNumber.invNumber}" method="GET" id="form-invnumber">
                     <label for="department">Инвентарный номер:</label>
                     <input class="form-control-sm" id="invnumber" name="invnumber" th:value="${invNumber.invNumber}" autofocus>
 <!--                        <div class="col-md-3">-->
-                            <button class="btn btn-primary" type="submit" onclick="searchInvNumber(); return false;" >Найти</button>
-<!--                        </div>-->
+                            <button class="btn btn-primary" type="submit" >Найти</button>
+<!--                    onclick="searchInvNumber(); return false;"-->
+                    <!--                        </div>-->
                 </form>
             </div>
             <div th:text="${invNumber.name}"></div>
@@ -29,35 +30,35 @@
                         th:value="${_csrf.token}" />
                 <div class="form-group">
                     <label for="mol">МОЛ</label>
-                                        <select class="form-control-sm" id="mol"
-                                                name="mol"
-                                                ng-model="filterForm.mol"
-                                                ng-options="mol for mol in mols track by mol"
-                                        >
-                                        </select>
-<!--                    <select class="form-control-sm" id="mol" name="mol">-->
-<!--                        <option value="?"> -&#45;&#45;</option>-->
-<!--                        <option th:each="item : ${allMols}"-->
-<!--                                th:value="${item}"-->
-<!--                                th:utext="${item}"-->
-<!--                                th:selected="${item} == ${mol}"></option>-->
-<!--                    </select>-->
+<!--                                        <select class="form-control-sm" id="mol"-->
+<!--                                                name="mol"-->
+<!--                                                ng-model="filterForm.mol"-->
+<!--                                                ng-options="mol for mol in mols track by mol"-->
+<!--                                        >-->
+<!--                                        </select>-->
+                    <select class="form-control-sm" id="mol" name="mol">
+                        <option value="?"> ---</option>
+                        <option th:each="item : ${allMols}"
+                                th:value="${item}"
+                                th:utext="${item}"
+                                th:selected="${item} == ${mol}"></option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="department">Подразделение</label>
-                                        <select class="form-control-sm" id="department"
-                                                name="codeDepartment"
-                                                ng-model="filterForm.department"
-                                                ng-options="department.nameDepartment for department in departments track by department.codeDepartment"
-                                        >
-                                        </select>
-<!--                    <select class="form-control-sm" id="department" name="codeDepartment">-->
-<!--                        <option value="?"> -&#45;&#45;</option>-->
-<!--                        <option th:each="item : ${allDepartments}"-->
-<!--                                th:value="${item.codeDepartment}"-->
-<!--                                th:utext="${item.nameDepartment}"-->
-<!--                                th:selected="${item.codeDepartment} == ${codeDepartment}"></option>-->
-<!--                    </select>-->
+<!--                                        <select class="form-control-sm" id="department"-->
+<!--                                                name="codeDepartment"-->
+<!--                                                ng-model="filterForm.department"-->
+<!--                                                ng-options="department.nameDepartment for department in departments track by department.codeDepartment"-->
+<!--                                        >-->
+<!--                                        </select>-->
+                    <select class="form-control-sm" id="department" name="codeDepartment">
+                        <option value="?"> ---</option>
+                        <option th:each="item : ${allDepartments}"
+                                th:value="${item.codeDepartment}"
+                                th:utext="${item.nameDepartment}"
+                                th:selected="${item.codeDepartment} == ${codeDepartment}"></option>
+                    </select>
 
                 </div>
                 <button type="submit" class=" form-control-sm btn btn-primary">Применить</button>
