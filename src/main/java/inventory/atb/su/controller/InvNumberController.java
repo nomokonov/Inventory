@@ -40,20 +40,46 @@ public class InvNumberController {
             Model model) throws InvalidNameException {
 //        String cn = ldapService.getCN(userDetails);
         model.addAttribute("user", user);
+
+        List<DepartmentDTO> allDepartments = fromExcelDataService.getAllDepartments();
+        List<String> mols = fromExcelDataService.getAllMols();
+        model.addAttribute("allDepartments", allDepartments);
+        model.addAttribute("allMols", mols);
+
         Optional<FromExcelData> invNumber = fromExcelDataService.getById(id);
         if (invNumber.isPresent()) {
-            List<DepartmentDTO> allDepartments = fromExcelDataService.getAllDepartments();
+            model.addAttribute("mol", invNumber.get().getMol());
+            model.addAttribute("codeDepartment", invNumber.get().getCodeDepartment());
+            model.addAttribute("invNumber", invNumber.get());
+        } else {
+            model.addAttribute("message","Введеный Инв.№ не найден");
+        }
 
-            List<String> mols = fromExcelDataService.getAllMols();
-            model.addAttribute("allDepartments", allDepartments);
-            model.addAttribute("allMols", mols);
+        return "invnumber";
+    }
 
+    @GetMapping("/user/find/")
+    public String FindInvNumber(
+            @RequestParam("invnumber") String findInvNumber,
+//            @AuthenticationPrincipal LdapUserDetails userDetails,
+            Principal user,
+            Model model) throws InvalidNameException {
+//        String cn = ldapService.getCN(userDetails);
+        model.addAttribute("user", user);
+
+        List<DepartmentDTO> allDepartments = fromExcelDataService.getAllDepartments();
+        List<String> mols = fromExcelDataService.getAllMols();
+        model.addAttribute("allDepartments", allDepartments);
+        model.addAttribute("allMols", mols);
+
+        Optional<FromExcelData> invNumber = fromExcelDataService.getByInvNumber(findInvNumber);
+        if (invNumber.isPresent()) {
             model.addAttribute("mol", invNumber.get().getMol());
             model.addAttribute("codeDepartment", invNumber.get().getCodeDepartment());
             model.addAttribute("invNumber", invNumber.get());
 
         } else {
-            return "404";
+            model.addAttribute("message","Введеный Инв.№ не найден");
         }
 
         return "invnumber";

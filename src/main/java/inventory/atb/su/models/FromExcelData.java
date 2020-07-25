@@ -67,6 +67,9 @@ public class FromExcelData {
     private LocalDate dateClosin;
     @Column(name = "oldinvnumber")
     private String oldInvNumber;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "invmovings_id", referencedColumnName = "id")
+    private InvMovings invMovings;
 
     protected FromExcelData() {
     }
@@ -121,6 +124,7 @@ public class FromExcelData {
         this.dateExploit = dateExploit != null ? new java.sql.Date(dateExploit.getTime()).toLocalDate(): null;
         this.dateClosin = dateClosin != null ? new java.sql.Date( dateClosin.getTime()).toLocalDate() : null;
         this.oldInvNumber = oldInvNumber;
+        this.invMovings = null;
     }
 
     public Long getId() {
@@ -281,5 +285,13 @@ public class FromExcelData {
 
     public void setOldInvNumber(String oldInvNumber) {
         this.oldInvNumber = oldInvNumber;
+    }
+
+    public InvMovings getInvMovings() {
+        return invMovings;
+    }
+
+    public void setInvMovings(InvMovings invMovings) {
+        this.invMovings = invMovings;
     }
 }

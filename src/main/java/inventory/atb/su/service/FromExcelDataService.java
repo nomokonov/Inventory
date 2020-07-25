@@ -87,4 +87,8 @@ public class FromExcelDataService {
 
 
     }
+
+    public Optional<FromExcelData> getByInvNumber(String invnumber) {
+        return fromExcelDataRepository.findByInvNumber(invnumber);
+    }
 }
