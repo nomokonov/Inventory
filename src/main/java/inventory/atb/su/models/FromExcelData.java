@@ -67,8 +67,7 @@ public class FromExcelData {
     private LocalDate dateClosin;
     @Column(name = "oldinvnumber")
     private String oldInvNumber;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "invmovings_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "fromExcelData", cascade = CascadeType.ALL)
     private InvMovings invMovings;
 
     protected FromExcelData() {

@@ -18,7 +18,8 @@
             <div>
                 <form class="form-inline" action="/user/find/" method="GET" id="form-invnumber">
                     <label for="department">Инвентарный номер:</label>
-                    <input class="form-control-sm" id="invnumber" name="invnumber" th:value="${invNumber} ? ${invNumber.invNumber}"
+                    <input class="form-control-sm" id="invnumber" name="invnumber"
+                           th:value="${invNumber} ? ${invNumber.invNumber}"
                            autofocus>
                     <!--                        <div class="col-md-3">-->
                     <button class="btn btn-primary" type="submit">Найти</button>
@@ -28,10 +29,22 @@
             </div>
             <div th:if="${invNumber}">
                 <div class="h4" th:text="${invNumber.name}"></div>
+                <div class="alert alert-danger" role="alert" th:if="${invNumber.invMovings}">
+                    <div >по выбранному инвентарномму есть назначенные изменения</div>
+                    <div
+                         th:utext="${invNumber.invMovings.mol}">
+                        АХТУНГ!
+                    </div>
+                    <div
+                         th:utext="${invNumber.invMovings.nameDepartment}">
+                        АХТУНГ!
+                    </div>
+                </div>
                 <div th:text="${invNumber.mol}"></div>
                 <div th:text="${invNumber.nameDepartment}"></div>
                 <p></p>
-                <form class="form" th:action="${invNumber} ? '/user/' + ${invNumber.id}" method="POST" id="form-mol-department">
+                <form class="form" th:action="${invNumber} ? '/user/' + ${invNumber.id}" method="POST"
+                      id="form-mol-department">
                     <input
                             type="hidden"
                             th:name="${_csrf.parameterName}"

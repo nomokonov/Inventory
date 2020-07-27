@@ -2,6 +2,7 @@ package inventory.atb.su.service;
 
 
 import inventory.atb.su.models.FromExcelData;
+import inventory.atb.su.models.InvMovings;
 import inventory.atb.su.models.dto.DepartmentDTO;
 import inventory.atb.su.repository.FromExcelDataRepository;
 import inventory.atb.su.repository.impl.DepartmentDaoImpl;
@@ -76,11 +77,17 @@ public class FromExcelDataService {
     public FromExcelData update(Long id, String mol, String codeDeparment) {
         Optional<FromExcelData> fromExcelDataFromDB = fromExcelDataRepository.findById(id);
         if (fromExcelDataFromDB.isPresent()) {
-                fromExcelDataFromDB.get().setMol(mol);
-                DepartmentDTO departmentByCode = departmentDao.getDepartmentByCode(codeDeparment);
-            fromExcelDataFromDB.get().setCodeDepartment(departmentByCode.getCodeDepartment());
-            fromExcelDataFromDB.get().setNameDepartment(departmentByCode.getNameDepartment());
-                return fromExcelDataRepository.saveAndFlush(fromExcelDataFromDB.get());
+            FromExcelData fromExcelData = fromExcelDataFromDB.get();
+            DepartmentDTO departmentByCode = departmentDao.getDepartmentByCode(codeDeparment);
+            if (fromExcelData.getInvMovings() == null) {
+                fromExcelData.setInvMovings(new InvMovings(mol, departmentByCode, fromExcelData));
+
+            } else {
+                fromExcelData.getInvMovings().setMol(mol);
+                fromExcelData.getInvMovings().setCodeDepartment(departmentByCode.getCodeDepartment());
+                fromExcelData.getInvMovings().setNameDepartment(departmentByCode.getNameDepartment());
+            }
+            return fromExcelDataRepository.saveAndFlush(fromExcelData);
         } else {
             return null;
         }

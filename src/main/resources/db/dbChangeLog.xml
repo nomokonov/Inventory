@@ -27,8 +27,7 @@
                 datePostings date,
                 dateExploit date,
                 dateClosin date,
-                oldInvNumber varchar,
-                invmovings_id serial
+                oldInvNumber varchar
             );
 
         </sql>
@@ -44,9 +43,9 @@
             CREATE TABLE movings (
             id SERIAL PRIMARY KEY,
             fromexcelid SERIAL REFERENCES fromexcel (id),
-            MOL	varchar NOT NULL,
-            codeDepartment varchar NOT NULL,
-            nameDepartment varchar NOT NULL,
+            MOL	varchar ,
+            codeDepartment varchar,
+            nameDepartment varchar ,
             FOREIGN KEY (fromexcelid) REFERENCES fromexcel (id)
             );
 
