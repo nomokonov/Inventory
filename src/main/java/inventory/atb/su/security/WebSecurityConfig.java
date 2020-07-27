@@ -49,14 +49,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/user/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')");
-        http.authorizeRequests().antMatchers("/scanning/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')");
-        http.authorizeRequests().antMatchers("/admin/**").hasAuthority(LDAP_ADMINGROUP);
+
         http
                 .authorizeRequests()
-                .anyRequest().fullyAuthenticated()
+                .antMatchers("/rest/**").permitAll()
+                .antMatchers("/user/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
+                .antMatchers("/scanning/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
+                .antMatchers("/admin/**").hasAuthority(LDAP_ADMINGROUP)
+
                 .and()
                 .formLogin()
+                .loginPage("/login")
                 .successHandler(customSuccessHandler)
                 .failureUrl("/login?error=true");
     }
@@ -83,7 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-    private void ConfigPrint(){
+    private void ConfigPrint() {
         logger.info("LDAP_SEARCHBASE = " + LDAP_SEARCHBASE);
         logger.info("LDAP_DOMAIN =     " + LDAP_DOMAIN);
         logger.info("LDAP_URL =        " + LDAP_URL);

@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/*")
-public class AdminController {
+public class  AdminController {
     private FromExcelDataService fromExcelDataService;
 
     @Autowired
@@ -43,15 +43,16 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public String uploadOneFileHandlerPOST(HttpServletRequest request, //
-                                           Model model, //
+    public String uploadOneFileHandlerPOST(HttpServletRequest request,
+                                           Principal user,
+                                           Model model,
                                            @ModelAttribute("myUploadForm") MyUploadForm myUploadForm) throws IOException {
 
         ArrayList<File> uploadedFiles = new ArrayList<File>();
         ArrayList<String> failedFiles = new ArrayList<String>();
         MyUploadForm.doUpload(request.getServletContext().getRealPath("upload"), myUploadForm.getFileDatas(), uploadedFiles, failedFiles);
         model.addAttribute("uploadedFiles", uploadedFiles);
-
+        model.addAttribute("user", user);
         if (myUploadForm.getClear_table()) {
             fromExcelDataService.deleteAll();
         }

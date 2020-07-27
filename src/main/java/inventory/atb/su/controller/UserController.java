@@ -29,7 +29,16 @@ public class UserController {
 		this.ldapService = ldapService;
 	}
 
-    @GetMapping("/user")
+	@GetMapping("/login")
+	public String loginPage(){
+    	return  "login";
+	}
+
+	@GetMapping( "/")
+	public String defRoute(){
+    	return "redirect:/user/";
+	}
+    @GetMapping( "/user")
     public String welcome(@RequestParam(defaultValue = "0") Integer page,
 						  @RequestParam(defaultValue = "20") Integer pageSize,
 						  @RequestParam(defaultValue = "name") String sortBy,
