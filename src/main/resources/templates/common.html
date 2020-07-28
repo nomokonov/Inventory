@@ -1,6 +1,6 @@
-<div th:fragment="header">
+<div  th:fragment="header">
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="ru">
     <header>
 
         <meta charset="UTF-8">
@@ -18,31 +18,40 @@
     <body  class="bg-gray" >
 </div>
 
-<nav class="navbar sticky-top navbar-dark bg-dark" th:fragment="topnavbar">
-    <img src="/static/images/favicon.png" width="30" height="30" alt="">
-    <a class="navbar-brand flex-left" Style="color:#aaa" href="/">Inventory list</a>
-    <div class="nav-link my-link flex-right"
-         th:if="${user}"
-         th:text="'Вы вошли как, ' + ${user.name} + ' | ' + ${user.principal.Dn}"></div>
-    <a class="nav-link my-link flex-right" href="/logout" th:if="${user}">Logout</a>
-</nav>
+<div th:fragment="topnavbar">
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <div class=" align-self-start">
+            <img src="/static/images/favicon.png" width="30" height="30" alt="">
+            <a class="navbar-brand" Style="color:#aaa" href="/">Inventory list</a>
+        </div>
+
+        <div class="nav-link my-link align-self-center"
+             th:if="${user}"
+             th:text="'Вы вошли как, ' + ${user.name} + ' | ' + ${user.principal.Dn}"></div>
+        <a class="nav-link my-link align-self-end" href="/logout" th:if="${user}">Logout</a>
+    </nav>
+</div>
+
 
 <!-- A vertical navbar -->
-<nav class="navbar bg-light sidebar align-items-start pt-4 pr-0 pl-0" th:fragment="leftnavbar">
-    <!-- Links -->
-    <div class="list-group col p-0 m-0">
-        <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">
-            <a href="/admin/" class="list-group-item list-group-item-action  rounded-0 border-0 "
-               th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/')}? active">Admin</a>
+<div th:fragment="leftnavbar">
+    <nav class="navbar bg-light sidebar align-items-start pt-4 pr-0 pl-0">
+        <!-- Links -->
+        <div class="list-group col p-0 m-0">
+            <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">
+                <a href="/admin/" class="list-group-item list-group-item-action  rounded-0 border-0 "
+                   th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/')}? active">Admin</a>
+            </div>
+            <a href="/user/" class="list-group-item list-group-item-action rounded-0 border-0"
+               th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/user/')}? active"
+            >Список имущества</a>
+            <a href="/scanning/" class="list-group-item list-group-item-action rounded-0 border-0"
+               th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/scanning/')}? active"
+            >Поиск имущества</a>
         </div>
-        <a href="/user/" class="list-group-item list-group-item-action rounded-0 border-0"
-           th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/user/')}? active"
-        >Список имущества</a>
-        <a href="/scanning/" class="list-group-item list-group-item-action rounded-0 border-0"
-           th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/scanning/')}? active"
-        >Поиск имущества</a>
-    </div>
-</nav>
+    </nav>
+</div>
+
 
 <footer th:fragment="footer">
     <!-- Optional JavaScript -->
