@@ -6,6 +6,7 @@ import inventory.atb.su.models.InvMovings;
 import inventory.atb.su.models.dto.DepartmentDTO;
 import inventory.atb.su.repository.FromExcelDataRepository;
 import inventory.atb.su.repository.impl.DepartmentDaoImpl;
+import inventory.atb.su.repository.impl.InvMouvingsRepositoryImpl;
 import inventory.atb.su.repository.impl.MolDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,12 +25,14 @@ import static org.springframework.data.jpa.domain.Specification.where;
 public class FromExcelDataService {
 
     private FromExcelDataRepository fromExcelDataRepository;
+    private InvMouvingsRepositoryImpl invMovingsRepository;
     private DepartmentDaoImpl departmentDao;
     private MolDaoImpl molDao;
 
     @Autowired
-    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor, DepartmentDaoImpl departmentDao, MolDaoImpl molDao) {
+    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor, InvMouvingsRepositoryImpl invMovingsRepository, DepartmentDaoImpl departmentDao, MolDaoImpl molDao) {
         this.fromExcelDataRepository = fromExcelDataRepositor;
+        this.invMovingsRepository = invMovingsRepository;
         this.departmentDao = departmentDao;
         this.molDao = molDao;
     }
@@ -79,6 +82,14 @@ public class FromExcelDataService {
         if (fromExcelDataFromDB.isPresent()) {
             FromExcelData fromExcelData = fromExcelDataFromDB.get();
             DepartmentDTO departmentByCode = departmentDao.getDepartmentByCode(codeDeparment);
+            if (fromExcelData.getCodeDepartment().equals(departmentByCode.getCodeDepartment())
+                    && fromExcelData.getMol().equals(mol)) {
+                if (fromExcelData.getInvMovings() != null){
+                    invMovingsRepository.deleteById(fromExcelData.getInvMovings().getId());
+                    fromExcelData.setInvMovings(null);
+                }
+                return fromExcelData;
+            }
             if (fromExcelData.getInvMovings() == null) {
                 fromExcelData.setInvMovings(new InvMovings(mol, departmentByCode, fromExcelData));
 

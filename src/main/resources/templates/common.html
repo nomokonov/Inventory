@@ -1,4 +1,4 @@
-<div  th:fragment="header">
+<div th:fragment="header">
     <!DOCTYPE html>
     <html lang="ru">
     <header>
@@ -15,7 +15,7 @@
         <!--crossorigin="anonymous">-->
     </header>
     <!---->
-    <body  class="bg-gray" >
+    <body class="bg-gray">
 </div>
 
 <div th:fragment="topnavbar">
@@ -28,7 +28,15 @@
         <div class="nav-link my-link align-self-center"
              th:if="${user}"
              th:text="'Вы вошли как, ' + ${user.name} + ' | ' + ${user.principal.Dn}"></div>
-        <a class="nav-link my-link align-self-end" href="/logout" th:if="${user}">Logout</a>
+        <!--        <a class="nav-link my-link align-self-end" href="/logout" th:if="${user}">Logout</a>-->
+        <form  id="logout-form" action="/logout" method="POST">
+<!--            <input class="form-control align-self-end" type="submit" value="Logout"/>-->
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+        </form>
+        <a class="nav-link my-link align-self-end"
+           th:if="${user}" href="#" onclick="document.getElementById('logout-form').submit();"> Logout </a>
     </nav>
 </div>
 
@@ -57,9 +65,9 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/webjars/jquery/jquery.min.js"></script>
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"-->
-<!--            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
-<!--            crossorigin="anonymous"></script>-->
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"-->
+    <!--            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
+    <!--            crossorigin="anonymous"></script>-->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script src="/webjars/angularjs/angular.js"></script>
     <script src="/webjars/angularjs/angular-route.js"></script>

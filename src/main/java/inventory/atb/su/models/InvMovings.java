@@ -12,7 +12,7 @@ public class InvMovings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "fromexcelid")
     private FromExcelData fromExcelData;
     @Column(name = "MOL")
@@ -62,5 +62,9 @@ public class InvMovings {
 
     public void setFromExcelData(FromExcelData fromExcelData) {
         this.fromExcelData = fromExcelData;
+    }
+
+    public Long getId() {
+        return  id;
     }
 }

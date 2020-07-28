@@ -53,10 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/rest/**").permitAll()
+
                 .antMatchers("/user/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
                 .antMatchers("/scanning/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
                 .antMatchers("/admin/**").hasAuthority(LDAP_ADMINGROUP)
-
+//                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
