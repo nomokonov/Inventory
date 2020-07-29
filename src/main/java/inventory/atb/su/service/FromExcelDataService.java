@@ -6,7 +6,6 @@ import inventory.atb.su.models.InvMovings;
 import inventory.atb.su.models.dto.DepartmentDTO;
 import inventory.atb.su.repository.FromExcelDataRepository;
 import inventory.atb.su.repository.InvMovingsRepository;
-import inventory.atb.su.repository.impl.DbUtilsDAO;
 import inventory.atb.su.repository.impl.DepartmentDaoImpl;
 import inventory.atb.su.repository.impl.MolDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +28,15 @@ public class FromExcelDataService {
     private InvMovingsRepository invMovingsRepository;
     private DepartmentDaoImpl departmentDao;
     private MolDaoImpl molDao;
-    private DbUtilsDAO dbUtilsDAO;
 
     @Autowired
-    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor, InvMovingsRepository invMovingsRepository, DepartmentDaoImpl departmentDao, MolDaoImpl molDao, DbUtilsDAO dbUtilsDAO) {
+    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor,
+                                InvMovingsRepository invMovingsRepository, DepartmentDaoImpl departmentDao,
+                                MolDaoImpl molDao) {
         this.fromExcelDataRepository = fromExcelDataRepositor;
         this.invMovingsRepository = invMovingsRepository;
         this.departmentDao = departmentDao;
         this.molDao = molDao;
-        this.dbUtilsDAO = dbUtilsDAO;
     }
 
     public FromExcelData Save(FromExcelData fromExcelData) {
@@ -46,7 +45,6 @@ public class FromExcelDataService {
 
     public void deleteAll() {
         fromExcelDataRepository.deleteAll();
-        dbUtilsDAO.sequencesRestart();
     }
 
     public void saveAll(List<FromExcelData> fromExcelDataList) {

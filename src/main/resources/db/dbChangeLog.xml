@@ -7,30 +7,26 @@
             Create TABLES ;
         </comment>
         <sql>
-
-            CREATE TABLE public.fromexcel
-            (
-                id integer NOT NULL DEFAULT nextval('fromexcel_id_seq'::regclass),
-                name character varying COLLATE pg_catalog."default",
-                invnumber character varying COLLATE pg_catalog."default",
+            CREATE TABLE fromexcel (
+                id SERIAL PRIMARY KEY,
+                name varchar,
+                invNumber varchar,
                 quantity integer,
-                unit character varying COLLATE pg_catalog."default",
+                unit varchar,
                 price numeric,
-                typetmc character varying COLLATE pg_catalog."default",
-                typeutilize character varying COLLATE pg_catalog."default",
-                codegroup character varying COLLATE pg_catalog."default",
-                namegroup character varying COLLATE pg_catalog."default",
-                mol character varying COLLATE pg_catalog."default",
-                codedepartment character varying COLLATE pg_catalog."default",
-                namedepartment character varying COLLATE pg_catalog."default",
-                locations character varying COLLATE pg_catalog."default",
-                nonsystem character varying COLLATE pg_catalog."default",
-                datecreation date,
-                datepostings date,
-                dateexploit date,
-                dateclosin date,
-                oldinvnumber character varying COLLATE pg_catalog."default",
-                CONSTRAINT fromexcel_pkey PRIMARY KEY (id)
+                typeTMC varchar,
+                typeUtilize varchar,
+                codeGroup varchar,
+                nameGroup varchar,
+                MOL	varchar,
+                molCodeDepartment	varchar,
+                codeDepartment varchar,
+                nameDepartment varchar,
+                nonSystem varchar,
+                dateCreation  date,
+                datePostings date,
+                dateExploit date,
+                dateClosin date
             )
 
         </sql>
@@ -40,27 +36,17 @@
     </changeSet>
     <changeSet author="Nomokonov Vladimir" id="2">
         <comment>
-            Create TABLE for movings ;
+            Create TABLE   for movings ;
         </comment>
         <sql>
-
-            CREATE TABLE public.movings
-            (
-                id integer NOT NULL DEFAULT nextval('movings_id_seq'::regclass),
-                fromexcelid integer NOT NULL DEFAULT nextval('movings_fromexcelid_seq'::regclass),
-                mol character varying COLLATE pg_catalog."default",
-                codedepartment character varying COLLATE pg_catalog."default",
-                namedepartment character varying COLLATE pg_catalog."default",
-                CONSTRAINT movings_pkey PRIMARY KEY (id),
-                CONSTRAINT movings_fromexcelid_fkey FOREIGN KEY (fromexcelid)
-                REFERENCES public.fromexcel (id) MATCH SIMPLE
-                ON UPDATE NO ACTION
-                ON DELETE NO ACTION,
-                CONSTRAINT movings_fromexcelid_fkey1 FOREIGN KEY (fromexcelid)
-                REFERENCES public.fromexcel (id) MATCH SIMPLE
-                ON UPDATE NO ACTION
-                ON DELETE NO ACTION
-            )
+            CREATE TABLE movings (
+            id SERIAL PRIMARY KEY,
+            fromexcelid SERIAL REFERENCES fromexcel (id),
+            MOL	varchar ,
+            codeDepartment varchar,
+            nameDepartment varchar ,
+            FOREIGN KEY (fromexcelid) REFERENCES fromexcel (id)
+            );
 
         </sql>
         <rollback>

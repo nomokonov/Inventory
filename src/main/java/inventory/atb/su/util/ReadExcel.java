@@ -31,19 +31,18 @@ public class ReadExcel {
                     row.getCell(4).getStringCellValue(),// 4	Ед. из мер
                     row.getCell(5).getNumericCellValue(), // 5	Цена
                     row.getCell(11).getStringCellValue(), // 11	Тип ТМЦ
-                    row.getCell(12).getStringCellValue(), // 12	Вид испо льзов
-                    row.getCell(13).getStringCellValue(), // 13	Код группы
-                    row.getCell(14).getStringCellValue(), // 14	Наимен группы
-                    row.getCell(15).getStringCellValue(), // 15	МОЛ
-                    row.getCell(16).getStringCellValue(), // 16	Код подр.
-                    row.getCell(17).getStringCellValue(), // 17	Подраз деление
-                    row.getCell(18).getStringCellValue(), // 18	Место нахож дение
-                    row.getCell(22).getStringCellValue(), // 22	Вне сист учет
-                    row.getCell(23).getDateCellValue(), // 23	Дата соз дания
-                    row.getCell(24).getDateCellValue(), // 24	Дата опри ходов
-                    row.getCell(25).getDateCellValue(), // 25	Дата ввода в экспл
-                    row.getCell(26).getDateCellValue(), //26	Дата списания
-                    row.getCell(47).getStringCellValue() //47	Старый инв. №
+                    row.getCell(13).getStringCellValue(), // 13	Вид испо льзов
+                    row.getCell(14).getStringCellValue(), // 14	Код группы
+                    row.getCell(15).getStringCellValue(), // 15	Наимен группы
+                    row.getCell(16).getStringCellValue(), // 16	МОЛ
+                    row.getCell(17).getStringCellValue(), //  17  МОЛ-Подраздленеие
+                    row.getCell(18).getStringCellValue(), // 18	Код подр.
+                    row.getCell(19).getStringCellValue(), // 19	Подраз деление
+                    row.getCell(23).getStringCellValue(), // 23	Вне сист учет
+                    row.getCell(24).getDateCellValue(), // 24	Дата соз дания
+                    row.getCell(25).getDateCellValue(), // 25	Дата опри ходов
+                    row.getCell(26).getDateCellValue(), // 26	Дата ввода в экспл
+                    row.getCell(27).getDateCellValue() //27	Дата списания
             );
             listfromExcelData.add(fromExcelData);
         }

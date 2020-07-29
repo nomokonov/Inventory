@@ -1,30 +1,14 @@
 package inventory.atb.su.models;
 
+import liquibase.pro.packaged.m;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "fromexcel")
 public class FromExcelData {
-    //    1	Наименование
-    //  2	Инв. №
-    //  3	Кол -во
-    //  4	Ед. из мер
-    //  5	Цена
-    //  11	Тип ТМЦ
-    //  12	Вид испо льзов
-    //  13	Код группы
-    //  14	Наимен группы
-    //  15	МОЛ
-    //  16	Код подр.
-    //  17	Подраз деление
-    //  18	Место нахож дение
-    //  22	Вне сист учет
-    //  23	Дата соз дания
-    //  24	Дата опри ходов
-    //  25	Дата ввода в экспл
-    //  26	Дата списания
-    //  47	Старый инв. №
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -49,12 +33,12 @@ public class FromExcelData {
     private String nameGroup;
     @Column(name = "MOL")
     private String mol;
+    @Column(name = "molcodedepartment")
+    private String molCodeDepartment;
     @Column(name = "codedepartment")
     private String codeDepartment;
     @Column(name = "namedepartment")
     private String nameDepartment;
-    @Column(name = "locations")
-    private String locations;
     @Column(name = "nonsystem")
     private String nonSystem;
     @Column(name = "datecreation")
@@ -65,45 +49,17 @@ public class FromExcelData {
     private LocalDate dateExploit;
     @Column(name = "dateclosin")
     private LocalDate dateClosin;
-    @Column(name = "oldinvnumber")
-    private String oldInvNumber;
     @OneToOne(mappedBy = "fromExcelData", cascade = CascadeType.ALL)
     private InvMovings invMovings;
 
     protected FromExcelData() {
     }
 
-    public FromExcelData(String name, String invNumber, Integer quantity, String unit,
-                         Double price, String typeTMC, String typeUtilize,
-                         String codeGroup, String nameGroup, String mol, String codeDepartment,
-                         String nameDepartment, String locations, String nonSystem, LocalDate dateCreation,
-                         LocalDate datePostings, LocalDate dateExploit, LocalDate dateClosin, String oldInvNumber) {
-        this.name = name;
-        this.invNumber = invNumber;
-        this.quantity = quantity;
-        this.unit = unit;
-        this.price = price;
-        this.typeTMC = typeTMC;
-        this.typeUtilize = typeUtilize;
-        this.codeGroup = codeGroup;
-        this.nameGroup = nameGroup;
-        this.mol = mol;
-        this.codeDepartment = codeDepartment;
-        this.nameDepartment = nameDepartment;
-        this.locations = locations;
-        this.nonSystem = nonSystem;
-        this.dateCreation = dateCreation;
-        this.datePostings = datePostings;
-        this.dateExploit = dateExploit;
-        this.dateClosin = dateClosin;
-        this.oldInvNumber = oldInvNumber;
-    }
-
     public FromExcelData(String name, String invNumber, double quantity, String unit,
                          double price, String typeTMC, String typeUtilize,
-                         String codeGroup, String nameGroup, String mol, String codeDepartment,
-                         String nameDepartment, String locations, String nonSystem, java.util.Date dateCreation,
-                         java.util.Date datePostings, java.util.Date dateExploit, java.util.Date dateClosin, String oldInvNumber) {
+                         String codeGroup, String nameGroup, String mol, String molCodeDepartment, String codeDepartment,
+                         String nameDepartment, String nonSystem, Date dateCreation,
+                         Date datePostings, Date dateExploit, Date dateClosin) {
         this.name = name;
         this.invNumber = invNumber;
         this.quantity = Double.valueOf(quantity).intValue();
@@ -114,15 +70,14 @@ public class FromExcelData {
         this.codeGroup = codeGroup;
         this.nameGroup = nameGroup;
         this.mol = mol;
+        this.molCodeDepartment = molCodeDepartment;
         this.codeDepartment = codeDepartment;
         this.nameDepartment = nameDepartment;
-        this.locations = locations;
         this.nonSystem = nonSystem;
-        this.dateCreation = dateCreation != null ? new java.sql.Date(dateCreation.getTime()).toLocalDate(): null;
-        this.datePostings = datePostings != null ? new java.sql.Date(datePostings.getTime()).toLocalDate(): null;
-        this.dateExploit = dateExploit != null ? new java.sql.Date(dateExploit.getTime()).toLocalDate(): null;
-        this.dateClosin = dateClosin != null ? new java.sql.Date( dateClosin.getTime()).toLocalDate() : null;
-        this.oldInvNumber = oldInvNumber;
+        this.dateCreation = dateCreation != null ? new java.sql.Date(dateCreation.getTime()).toLocalDate() : null;
+        this.datePostings = datePostings != null ? new java.sql.Date(datePostings.getTime()).toLocalDate() : null;
+        this.dateExploit = dateExploit != null ? new java.sql.Date(dateExploit.getTime()).toLocalDate() : null;
+        this.dateClosin = dateClosin != null ? new java.sql.Date(dateClosin.getTime()).toLocalDate() : null;
         this.invMovings = null;
     }
 
@@ -214,6 +169,14 @@ public class FromExcelData {
         this.mol = mol;
     }
 
+    public String getMolCodeDepartment() {
+        return molCodeDepartment;
+    }
+
+    public void setMolCodeDepartment(String molCodeDepartment) {
+        this.molCodeDepartment = molCodeDepartment;
+    }
+
     public String getCodeDepartment() {
         return codeDepartment;
     }
@@ -228,14 +191,6 @@ public class FromExcelData {
 
     public void setNameDepartment(String nameDepartment) {
         this.nameDepartment = nameDepartment;
-    }
-
-    public String getLocations() {
-        return locations;
-    }
-
-    public void setLocations(String locations) {
-        this.locations = locations;
     }
 
     public String getNonSystem() {
@@ -276,14 +231,6 @@ public class FromExcelData {
 
     public void setDateClosin(LocalDate dateClosin) {
         this.dateClosin = dateClosin;
-    }
-
-    public String getOldInvNumber() {
-        return oldInvNumber;
-    }
-
-    public void setOldInvNumber(String oldInvNumber) {
-        this.oldInvNumber = oldInvNumber;
     }
 
     public InvMovings getInvMovings() {
