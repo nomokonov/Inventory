@@ -5,8 +5,9 @@ import inventory.atb.su.models.FromExcelData;
 import inventory.atb.su.models.InvMovings;
 import inventory.atb.su.models.dto.DepartmentDTO;
 import inventory.atb.su.repository.FromExcelDataRepository;
+import inventory.atb.su.repository.InvMovingsRepository;
+import inventory.atb.su.repository.impl.DbUtilsDAO;
 import inventory.atb.su.repository.impl.DepartmentDaoImpl;
-import inventory.atb.su.repository.impl.InvMouvingsRepositoryImpl;
 import inventory.atb.su.repository.impl.MolDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,16 +26,18 @@ import static org.springframework.data.jpa.domain.Specification.where;
 public class FromExcelDataService {
 
     private FromExcelDataRepository fromExcelDataRepository;
-    private InvMouvingsRepositoryImpl invMovingsRepository;
+    private InvMovingsRepository invMovingsRepository;
     private DepartmentDaoImpl departmentDao;
     private MolDaoImpl molDao;
+    private DbUtilsDAO dbUtilsDAO;
 
     @Autowired
-    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor, InvMouvingsRepositoryImpl invMovingsRepository, DepartmentDaoImpl departmentDao, MolDaoImpl molDao) {
+    public FromExcelDataService(FromExcelDataRepository fromExcelDataRepositor, InvMovingsRepository invMovingsRepository, DepartmentDaoImpl departmentDao, MolDaoImpl molDao, DbUtilsDAO dbUtilsDAO) {
         this.fromExcelDataRepository = fromExcelDataRepositor;
         this.invMovingsRepository = invMovingsRepository;
         this.departmentDao = departmentDao;
         this.molDao = molDao;
+        this.dbUtilsDAO = dbUtilsDAO;
     }
 
     public FromExcelData Save(FromExcelData fromExcelData) {
@@ -43,6 +46,7 @@ public class FromExcelDataService {
 
     public void deleteAll() {
         fromExcelDataRepository.deleteAll();
+        dbUtilsDAO.sequencesRestart();
     }
 
     public void saveAll(List<FromExcelData> fromExcelDataList) {
@@ -85,8 +89,11 @@ public class FromExcelDataService {
             if (fromExcelData.getCodeDepartment().equals(departmentByCode.getCodeDepartment())
                     && fromExcelData.getMol().equals(mol)) {
                 if (fromExcelData.getInvMovings() != null){
-                    invMovingsRepository.deleteById(fromExcelData.getInvMovings().getId());
+                    InvMovings invMovingsFromDB = invMovingsRepository.getOne(fromExcelData.getInvMovings().getId());
                     fromExcelData.setInvMovings(null);
+                    invMovingsRepository.delete(invMovingsFromDB);
+
+                    return fromExcelDataRepository.save(fromExcelData);
                 }
                 return fromExcelData;
             }
