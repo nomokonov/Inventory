@@ -49,25 +49,28 @@
                 <button type="submit" class=" form-control-sm btn btn-primary">Применить</button>
             </form>
             <div class="row">
-                <div class="col-md-3" th:text="'Найдено:' + ${totalElements}"></div>
+                <div class="col-md" th:text="'Найдено:' + ${totalElements}"></div>
             </div>
             <div class="row">
-                <div class="col-md-3" th:text="'Страница:' + ${page+1}+' из ' +${totalPages}"></div>
-                <div class="col-md-3">
-
+                <div class="col" th:text="'Страница:' + ${page+1}+' из ' +${totalPages}"></div>
+                <div class="col">
                     <a href=""
                        th:if="${page>0}"
                        th:with="p_codeDepartment=(${codeDepartment}? 'codeDepartment='+${codeDepartment}: null)"
                        th:href="@{?(page=${page-1},mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}">Предыдущая
-                        стр</a>&nbsp;&nbsp;&nbsp;
+                        стр</a>
+                </div>
+                <div class="col">
                     <a href="@{}"
                        th:if="${page<totalPages-1}"
                        th:href="@{?(page=${page+1} ,mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}"
                     >Следующая стр</a>
                 </div>
-                <div class="col-md-3" th:text="' Выводить по: ' + ${pageSize}"></div>
+                <div class="col" th:text="' Выводить по: ' + ${pageSize}"></div>
             </div>
-            <table class="table table-sm table-hover table-fixed" id="user-tasks-table" width="0%">
+
+
+            <table class="table-sm table-bordered table-hover">
                 <thead id="thead-table-user-tasks">
                 <tr class="head-table">
                     <th width="8%">Инв. №</th>
@@ -82,20 +85,21 @@
                 <tbody id="table-body">
                 <tr style="cursor: pointer; " th:each="item : ${dataList}"
                     th:onclick="'window.location.href=\'' + ${item.id} + '/\' ; return false'">
-                        <td th:text="${item.invNumber}"></td>
-                        <td th:text="${item.name}"></td>
-                        <td th:text="${item.typeUtilize}"></td>
-                        <td th:text="${item.nameGroup}"></td>
-                        <td th:text="${item.nameDepartment}"></td>
-                        <td th:text="${item.nonSystem}"></td>
-                        <td><span th:if="${item.datePostings != null}"
-                                  th:text="${#temporals.format(item.datePostings,'dd.MM.yyyy')}"></span></td>
+                    <td th:text="${item.invNumber}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.typeUtilize}"></td>
+                    <td th:text="${item.nameGroup}"></td>
+                    <td th:text="${item.nameDepartment}"></td>
+                    <td th:text="${item.nonSystem}"></td>
+                    <td><span th:if="${item.datePostings != null}"
+                              th:text="${#temporals.format(item.datePostings,'dd.MM.yyyy')}"></span></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-
     </div>
+
+</div>
 </div>
 
 <div th:include="common :: footer"></div>

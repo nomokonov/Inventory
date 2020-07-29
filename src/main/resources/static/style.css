@@ -2,6 +2,10 @@
     background-color:#eee;
 }
 
+body {
+    padding-top: 63px;
+}
+
 .my-btn-primary {
     color: #fff;
     background-color: #275d8d;

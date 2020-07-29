@@ -19,7 +19,7 @@
 </div>
 
 <div th:fragment="topnavbar">
-    <nav class="navbar sticky-top navbar-dark bg-dark">
+    <nav class="navbar fixed-top  navbar-dark bg-dark">
         <div class=" align-self-start">
             <img src="/static/images/favicon.png" width="30" height="30" alt="">
             <a class="navbar-brand" Style="color:#aaa" href="/">Inventory list</a>
@@ -43,7 +43,7 @@
 
 <!-- A vertical navbar -->
 <div th:fragment="leftnavbar">
-    <nav class="navbar bg-light sidebar align-items-start pt-4 pr-0 pl-0">
+    <nav class="navbar bg-light sidebar align-items-start mt-0 pr-0 pl-0">
         <!-- Links -->
         <div class="list-group col p-0 m-0">
             <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">
