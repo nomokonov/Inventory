@@ -52,7 +52,7 @@ public class InvNumberController {
             model.addAttribute("codeDepartment", invNumber.get().getCodeDepartment());
             model.addAttribute("invNumber", invNumber.get());
         } else {
-            model.addAttribute("message","Введеный Инв.№ не найден");
+            model.addAttribute("message", "Введеный Инв.№ не найден");
         }
 
         return "invnumber";
@@ -79,7 +79,7 @@ public class InvNumberController {
             model.addAttribute("invNumber", invNumber.get());
 
         } else {
-            model.addAttribute("message","Введеный Инв.№ не найден");
+            model.addAttribute("message", "Введеный Инв.№ не найден");
         }
 
         return "invnumber";
@@ -91,10 +91,27 @@ public class InvNumberController {
                                 Principal user,
                                 @RequestParam("mol") String mol,
                                 @RequestParam("codeDepartment") String codeDeparment,
-                                Model model     ) {
+                                Model model) {
         model.addAttribute("user", user);
-         FromExcelData frpFromExcelData = fromExcelDataService.update(id,mol,codeDeparment);
+        FromExcelData frpFromExcelData = fromExcelDataService.update(id, mol, codeDeparment);
         return "redirect:/user/" + id + "/";
+    }
+
+    @GetMapping("/user/{id}/print")
+    public String InvNumberPrintPage(
+            @PathVariable Long id,
+            @AuthenticationPrincipal LdapUserDetails userDetails,
+            Principal user,
+            Model model) throws InvalidNameException {
+
+        Optional<FromExcelData> invNumber = fromExcelDataService.getById(id);
+        if (invNumber.isPresent()) {
+            model.addAttribute("invNumber", invNumber.get());
+        } else {
+            model.addAttribute("message", "Введеный Инв.№ не найден");
+        }
+
+        return "barcodeprint";
     }
 
 

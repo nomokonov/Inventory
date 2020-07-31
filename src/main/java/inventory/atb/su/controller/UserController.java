@@ -50,8 +50,6 @@ public class UserController {
 		String cn = ldapService.getCN(userDetails);
 		if (mol.isPresent() && !mol.get().equals("?")){
 			cn=mol.get();
-
-
 		}
 		if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")){
 			model.addAttribute("codeDepartment",codeDepartment.get());

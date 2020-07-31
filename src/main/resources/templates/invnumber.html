@@ -29,14 +29,20 @@
             </div>
             <div th:if="${invNumber}">
                 <div class="h4" th:text="${invNumber.name}"></div>
+                <div>
+                    <a th:href="'/user/' + ${invNumber.id} + '/print'" target="_blank" title="Печать">
+                        <img th:src="'/rest/barcodes/zxing/code128/' + ${invNumber.invNumber}"/>
+                    </a>
+                </div>
+                <div th:text="${invNumber.invNumber}"></div>
                 <div class="alert alert-danger" role="alert" th:if="${invNumber.invMovings}">
-                    <div >по выбранному инвентарномму есть назначенные изменения</div>
+                    <div>по выбранному инвентарномму есть назначенные изменения</div>
                     <div
-                         th:utext="${invNumber.invMovings.mol}">
+                            th:utext="${invNumber.invMovings.mol}">
                         АХТУНГ!
                     </div>
                     <div
-                         th:utext="${invNumber.invMovings.nameDepartment}">
+                            th:utext="${invNumber.invMovings.nameDepartment}">
                         АХТУНГ!
                     </div>
                 </div>

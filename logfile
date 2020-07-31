@@ -1,0 +1,312 @@
+2020-07-29 08:46:27.663 +09 [5472] ���������:  ��� ����� ����������� �� ������ IPv6 "::1" ������ ���� 5432
+2020-07-29 08:46:27.663 +09 [5472] ���������:  ��� ����� ����������� �� ������ IPv4 "127.0.0.1" ������ ���� 5432
+2020-07-29 08:46:27.812 +09 [10968] ���������:  ������� �� ���� ���������: 2020-07-28 17:41:34 +09
+2020-07-29 08:46:27.921 +09 [5472] ���������:  ������� �� ������ ��������� �����������
+2020-07-29 10:18:47.382 +09 [6176] ОШИБКА:  столбец fromexceld0_.moving_id не существует (символ 289)
+2020-07-29 10:18:47.382 +09 [6176] ОПЕРАТОР:  select fromexceld0_.id as id1_0_, fromexceld0_.codedepartment as codedepa2_0_, fromexceld0_.codegroup as codegrou3_0_, fromexceld0_.dateclosin as dateclos4_0_, fromexceld0_.datecreation as datecrea5_0_, fromexceld0_.dateexploit as dateexpl6_0_, fromexceld0_.datepostings as datepost7_0_, fromexceld0_.moving_id as moving_21_0_, fromexceld0_.invnumber as invnumbe8_0_, fromexceld0_.locations as location9_0_, fromexceld0_.mol as mol10_0_, fromexceld0_.name as name11_0_, fromexceld0_.namedepartment as namedep12_0_, fromexceld0_.namegroup as namegro13_0_, fromexceld0_.nonsystem as nonsyst14_0_, fromexceld0_.oldinvnumber as oldinvn15_0_, fromexceld0_.price as price16_0_, fromexceld0_.quantity as quantit17_0_, fromexceld0_.typetmc as typetmc18_0_, fromexceld0_.typeutilize as typeuti19_0_, fromexceld0_.unit as unit20_0_ from fromexcel fromexceld0_ where fromexceld0_.mol=$1 order by fromexceld0_.name asc limit $2
+2020-07-29 10:44:37.440 +09 [4264] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-29 10:44:37.440 +09 [4264] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-29 10:44:39.716 +09 [4264] ОШИБКА:  ошибка синтаксиса (примерное положение: ")") (символ 170)
+2020-07-29 10:44:39.716 +09 [4264] ОПЕРАТОР:  CREATE TABLE movings (
+	            id SERIAL PRIMARY KEY,
+	            MOL	varchar ,
+	            codeDepartment varchar,
+	            nameDepartment varchar ,
+	            )
+2020-07-29 10:44:58.980 +09 [8640] ОШИБКА:  ошибка синтаксиса (примерное положение: ")") (символ 170)
+2020-07-29 10:44:58.980 +09 [8640] ОПЕРАТОР:  CREATE TABLE movings (
+	            id SERIAL PRIMARY KEY,
+	            MOL	varchar ,
+	            codeDepartment varchar,
+	            nameDepartment varchar ,
+	            )
+2020-07-29 10:49:44.693 +09 [5460] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-29 10:49:44.693 +09 [5460] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-29 10:49:46.660 +09 [5460] ОШИБКА:  ошибка синтаксиса (примерное положение: ")") (символ 170)
+2020-07-29 10:49:46.660 +09 [5460] ОПЕРАТОР:  CREATE TABLE movings (
+	            id SERIAL PRIMARY KEY,
+	            MOL	varchar ,
+	            codeDepartment varchar,
+	            nameDepartment varchar ,
+	            )
+2020-07-29 10:50:48.429 +09 [5344] ОШИБКА:  нулевое значение в столбце "movingid" нарушает ограничение NOT NULL
+2020-07-29 10:50:48.429 +09 [5344] ПОДРОБНОСТИ:  Ошибочная строка содержит (1, ШКАФ-ГАРДЕРОБ, 11700060002, 0, Шт., 17000.4, ОС, СПИСАНО, 153, Мебель_эксплуатация, Бунакова Анастасия Викторовна, 001-00-14-123, (ВХО) Операционный офис № 101 в г. Чит..., г. Чита, ул. Бабушкина 100, Нет, 2006-11-12, 2006-11-12, 2006-11-12, 2015-02-18, 11700060002, null).
+2020-07-29 10:50:48.429 +09 [5344] ОПЕРАТОР:  insert into fromexcel (codedepartment, codegroup, dateclosin, datecreation, dateexploit, datepostings, movingid, invnumber, locations, mol, name, namedepartment, namegroup, nonsystem, oldinvnumber, price, quantity, typetmc, typeutilize, unit) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+	RETURNING *
+2020-07-29 10:53:47.667 +09 [10244] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-29 10:53:47.667 +09 [10244] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-29 10:54:19.960 +09 [10244] ОШИБКА:  нулевое значение в столбце "movingid" нарушает ограничение NOT NULL
+2020-07-29 10:54:19.960 +09 [10244] ПОДРОБНОСТИ:  Ошибочная строка содержит (1, ШКАФ-ГАРДЕРОБ, 11700060002, 0, Шт., 17000.4, ОС, СПИСАНО, 153, Мебель_эксплуатация, Бунакова Анастасия Викторовна, 001-00-14-123, (ВХО) Операционный офис № 101 в г. Чит..., г. Чита, ул. Бабушкина 100, Нет, 2006-11-12, 2006-11-12, 2006-11-12, 2015-02-18, 11700060002, null).
+2020-07-29 10:54:19.960 +09 [10244] ОПЕРАТОР:  insert into fromexcel (codedepartment, codegroup, dateclosin, datecreation, dateexploit, datepostings, movingid, invnumber, locations, mol, name, namedepartment, namegroup, nonsystem, oldinvnumber, price, quantity, typetmc, typeutilize, unit) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+	RETURNING *
+2020-07-29 11:43:26.141 +09 [7856] ОШИБКА:  нулевое значение в столбце "movingid" нарушает ограничение NOT NULL
+2020-07-29 11:43:26.141 +09 [7856] ПОДРОБНОСТИ:  Ошибочная строка содержит (2, ШКАФ-ГАРДЕРОБ, 11700060002, 0, Шт., 17000.4, ОС, СПИСАНО, 153, Мебель_эксплуатация, Бунакова Анастасия Викторовна, 001-00-14-123, (ВХО) Операционный офис № 101 в г. Чит..., г. Чита, ул. Бабушкина 100, Нет, 2006-11-12, 2006-11-12, 2006-11-12, 2015-02-18, 11700060002, null).
+2020-07-29 11:43:26.141 +09 [7856] ОПЕРАТОР:  insert into fromexcel (codedepartment, codegroup, dateclosin, datecreation, dateexploit, datepostings, movingid, invnumber, locations, mol, name, namedepartment, namegroup, nonsystem, oldinvnumber, price, quantity, typetmc, typeutilize, unit) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+	RETURNING *
+2020-07-29 12:04:42.599 +09 [9332] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-29 12:04:42.599 +09 [9332] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-29 12:04:44.615 +09 [9332] ОШИБКА:  для столбца "movingid" таблицы "fromexcel" указано несколько значений по умолчанию
+2020-07-29 12:04:44.615 +09 [9332] ОПЕРАТОР:  CREATE TABLE fromexcel (
+	                id SERIAL PRIMARY KEY,
+	                name VARCHAR,
+	                invNumber VARCHAR,
+	                quantity INTEGER,
+	                unit VARCHAR,
+	                price NUMERIC,
+	                typeTMC VARCHAR,
+	                typeUtilize VARCHAR,
+	                codeGroup VARCHAR,
+	                nameGroup VARCHAR,
+	                MOL	VARCHAR,
+	                codeDepartment VARCHAR,
+	                nameDepartment VARCHAR,
+	                locations VARCHAR,
+	                nonSystem VARCHAR,
+	                dateCreation  DATE,
+	                datePostings DATE,
+	                dateExploit DATE,
+	                dateClosin DATE,
+	                oldInvNumber VARCHAR,
+	                movingid SERIAL DEFAULT NULL
+	            )
+2020-07-29 12:14:03.021 +09 [6048] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-29 12:14:03.021 +09 [6048] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-29 12:14:05.089 +09 [6048] ОШИБКА:  отношение "movings" не существует
+2020-07-29 12:14:05.089 +09 [6048] ОПЕРАТОР:  CREATE TABLE fromexcel (
+	                id SERIAL PRIMARY KEY,
+	                name VARCHAR,
+	                invNumber VARCHAR,
+	                quantity INTEGER,
+	                unit VARCHAR,
+	                price NUMERIC,
+	                typeTMC VARCHAR,
+	                typeUtilize VARCHAR,
+	                codeGroup VARCHAR,
+	                nameGroup VARCHAR,
+	                MOL	VARCHAR,
+	                codeDepartment VARCHAR,
+	                nameDepartment VARCHAR,
+	                locations VARCHAR,
+	                nonSystem VARCHAR,
+	                dateCreation  DATE,
+	                datePostings DATE,
+	                dateExploit DATE,
+	                dateClosin DATE,
+	                oldInvNumber VARCHAR,
+	                movingid SERIAL REFERENCES movings (id)
+	            )
+2020-07-29 12:27:44.249 +09 [10352] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-29 12:27:44.249 +09 [10352] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-29 17:49:55.694 +09 [2412] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-29 17:49:55.694 +09 [2412] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-30 09:08:46.758 +09 [7260] ОШИБКА:  отношение "public.databasechangeloglock" не существует (символ 22)
+2020-07-30 09:08:46.758 +09 [7260] ОПЕРАТОР:  SELECT COUNT(*) FROM public.databasechangeloglock
+2020-07-30 11:48:34.482 +09 [4740] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.482 +09 [11580] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.482 +09 [5756] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.482 +09 [224] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.482 +09 [9376] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.483 +09 [944] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.483 +09 [11896] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.483 +09 [11432] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.484 +09 [6356] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 11:48:34.484 +09 [11596] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.014 +09 [10320] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.015 +09 [11672] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.015 +09 [10308] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.015 +09 [1152] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.016 +09 [1532] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.016 +09 [11300] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.016 +09 [8664] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.015 +09 [11892] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.017 +09 [7496] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:22:49.017 +09 [8100] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.932 +09 [3084] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.934 +09 [2004] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.939 +09 [6208] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.940 +09 [6548] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.940 +09 [10276] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.940 +09 [812] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.940 +09 [3164] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.940 +09 [12112] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.940 +09 [10488] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:24:26.941 +09 [9716] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.319 +09 [11336] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.320 +09 [7400] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.321 +09 [12268] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.322 +09 [12096] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.322 +09 [11332] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.323 +09 [7844] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.325 +09 [12120] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.326 +09 [3556] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.327 +09 [2484] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 12:27:06.328 +09 [11848] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.456 +09 [11700] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.457 +09 [5140] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.457 +09 [12032] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.458 +09 [8176] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.459 +09 [11476] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.461 +09 [8160] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.461 +09 [12260] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.461 +09 [5416] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.462 +09 [9268] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:40:57.464 +09 [7312] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.265 +09 [11748] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.266 +09 [9636] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.266 +09 [1608] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.267 +09 [5352] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.269 +09 [8432] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.270 +09 [11928] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.270 +09 [9756] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.270 +09 [5860] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.270 +09 [11280] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:42:28.280 +09 [11584] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.299 +09 [4148] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.300 +09 [10980] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.300 +09 [9240] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.302 +09 [3780] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.303 +09 [5764] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.303 +09 [5888] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.304 +09 [12228] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.305 +09 [12000] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.300 +09 [11456] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 14:45:16.308 +09 [2020] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:04:31.897 +09 [2336] ���������:  ��� ����� ����������� �� ������ IPv6 "::1" ������ ���� 5432
+2020-07-30 15:04:31.898 +09 [2336] ���������:  ��� ����� ����������� �� ������ IPv4 "127.0.0.1" ������ ���� 5432
+2020-07-30 15:04:32.143 +09 [7080] ���������:  ������ ������� �� ���� ��������; ��������� ������ ������: 2020-07-30 14:41:30 +09
+2020-07-30 15:04:33.114 +09 [7080] ���������:  ������� �� ���� ����������� ��������; ������������ �������������� ��������������
+2020-07-30 15:04:33.154 +09 [7080] ���������:  ������ REDO ���������� �� �������� 0/12C72860
+2020-07-30 15:04:33.181 +09 [7080] ���������:  �������� ����� ������ �� �������� 0/12C72DF0: ��������� 24, �������� 0
+2020-07-30 15:04:33.181 +09 [7080] ���������:  ������ REDO ���������� �� �������� 0/12C72DB8
+2020-07-30 15:04:33.181 +09 [7080] ���������:  ��������� ����������� ���������� ���� ��������� � 2020-07-30 14:44:25.931926+09
+2020-07-30 15:04:33.455 +09 [2336] ���������:  ������� �� ������ ��������� �����������
+2020-07-30 15:12:58.769 +09 [2348] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.775 +09 [2660] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.775 +09 [932] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.776 +09 [8968] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.777 +09 [1856] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.775 +09 [6864] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.777 +09 [2280] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.779 +09 [1616] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.779 +09 [3092] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:12:58.782 +09 [2288] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.155 +09 [9152] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.159 +09 [7364] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.160 +09 [9176] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.161 +09 [10180] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.161 +09 [7080] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.161 +09 [1664] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.162 +09 [7996] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.162 +09 [8304] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.162 +09 [7804] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-30 15:44:05.179 +09 [2976] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [4420] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [9372] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [2176] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [2292] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [4376] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [8968] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [3416] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.459 +09 [524] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.459 +09 [8468] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	
+2020-07-31 09:51:30.458 +09 [10108] СООБЩЕНИЕ:  не удалось получить данные от клиента: An existing connection was forcibly closed by the remote host.
+	

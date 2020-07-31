@@ -29,7 +29,7 @@ public class ZxingBarcodeGenerator {
 
     public static BufferedImage generateCode128BarcodeImage(String barcodeText) throws Exception {
         Code128Writer barcodeWriter = new Code128Writer();
-        BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.CODE_128, 300, 150);
+        BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.CODE_128, 300, 100);
 
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }

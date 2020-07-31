@@ -86,7 +86,7 @@ public class FromExcelDataService {
             DepartmentDTO departmentByCode = departmentDao.getDepartmentByCode(codeDeparment);
             if (fromExcelData.getCodeDepartment().equals(departmentByCode.getCodeDepartment())
                     && fromExcelData.getMol().equals(mol)) {
-                if (fromExcelData.getInvMovings() != null){
+                if (fromExcelData.getInvMovings() != null) {
                     InvMovings invMovingsFromDB = invMovingsRepository.getOne(fromExcelData.getInvMovings().getId());
                     fromExcelData.setInvMovings(null);
                     invMovingsRepository.delete(invMovingsFromDB);
@@ -113,5 +113,11 @@ public class FromExcelDataService {
 
     public Optional<FromExcelData> getByInvNumber(String invnumber) {
         return fromExcelDataRepository.findByInvNumber(invnumber);
+    }
+
+    public Page<InvMovings> getAllWithInvMovings(Integer page, Integer pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
+        Page<InvMovings> pagedResult = invMovingsRepository.findAll( pageable);
+        return pagedResult;
     }
 }

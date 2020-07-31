@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -42,6 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${config.ldap-usergroup}")
     public String LDAP_USERGROUP;
 
+    @Value("${config.upload-path}")
+    public  String UPLOAD_PATH;
+
     @Autowired
     public WebSecurityConfig(CustomSuccessHandler customSuccessHandler) {
         this.customSuccessHandler = customSuccessHandler;
@@ -52,10 +56,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/rest/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/rest/**" ).permitAll()
 
                 .antMatchers("/user/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
-                .antMatchers("/scanning/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
+                .antMatchers("/invmovings/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
                 .antMatchers("/admin/**").hasAuthority(LDAP_ADMINGROUP)
 //                .anyRequest().authenticated()
                 .and()
@@ -97,6 +101,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("LDAP_ADMINGROUP = " + LDAP_ADMINGROUP);
         logger.info("LDAP_USERGROUP =  " + LDAP_USERGROUP);
         logger.info("LDAP_FILTER =     (&(objectClass=user)(userPrincipalName={0})" + LDAP_FILTER + ")");
+        logger.info("UPLOAD_PATH =     " + UPLOAD_PATH);
     }
 
 }

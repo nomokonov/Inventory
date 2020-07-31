@@ -53,9 +53,11 @@
             <a href="/user/" class="list-group-item list-group-item-action rounded-0 border-0"
                th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/user/')}? active"
             >Список имущества</a>
-            <a href="/scanning/" class="list-group-item list-group-item-action rounded-0 border-0"
-               th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/scanning/')}? active"
-            >Поиск имущества</a>
+            <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">
+            <a href="/invmovings/" class="list-group-item list-group-item-action rounded-0 border-0"
+               th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/invmovings/')}? active"
+            >Измененные</a>
+            </div>
         </div>
     </nav>
 </div>
