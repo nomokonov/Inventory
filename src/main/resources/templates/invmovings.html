@@ -11,7 +11,7 @@
             <h3>Список имущества к перемещению:</h3>
 
             Фильтр:
-            <form class="form-inline" action="" method="GET" id="form-mol-department">
+            <form class="form-inline" action="" method="GET" >
                 <div class="form-group">
                     <label for="mol">МОЛ</label>
                     <select class="form-control-sm" id="mol" name="mol">
@@ -35,6 +35,11 @@
                 </div>
                 <button type="submit" class=" form-control-sm btn btn-primary">Применить</button>
             </form>
+            <div class="row">
+                <form class="form-inline  pt-3" action="getdocsmovings" method="GET">
+                    <button type="submit" class=" form-control-sm btn btn-primary">Сформировать перемещения</button>
+                </form>
+            </div>
             <div class="row">
                 <div class="col-md" th:text="'Найдено:' + ${totalElements}"></div>
             </div>
@@ -72,12 +77,12 @@
                     <td th:text="${item.FromExcelData.invNumber}"></td>
                     <td th:text="${item.FromExcelData.name}"></td>
                     <td>
-                        <p><strong th:text="${item.mol}">Жирный текст.</strong></p>
-                        <p><s th:text="${item.FromExcelData.mol}">Зачеркнутый.</s></p>
+                        <span><strong th:text="${item.mol}">Жирный текст.</strong></span><br/>
+                        <span><s th:text="${item.FromExcelData.mol}">Зачеркнутый.</s></span>
                     </td>
                     <td>
-                        <p><strong th:text="${item.nameDepartment}">Жирный текст.</strong></p>
-                        <p><s th:text="${item.FromExcelData.nameDepartment}">Зачеркнутый.</s></p>
+                        <span><strong th:text="${item.nameDepartment}">Жирный текст.</strong></span><br/>
+                        <span><s th:text="${item.FromExcelData.nameDepartment}">Зачеркнутый.</s></span>
                     </td>
                 </tr>
                 </tbody>

@@ -37,8 +37,8 @@ public class BarcodesController {
         return okResponse(ZxingBarcodeGenerator.generatePDF417BarcodeImage(barcode));
     }
 
-    @PostMapping(value = "/zxing/qrcode", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<BufferedImage> zxingQRCode(@RequestBody String barcode) throws Exception {
+    @GetMapping(value = "/zxing/qrcode/{barcode}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<BufferedImage> zxingQRCode(@PathVariable String barcode) throws Exception {
         return okResponse(ZxingBarcodeGenerator.generateQRCodeImage(barcode));
     }
 

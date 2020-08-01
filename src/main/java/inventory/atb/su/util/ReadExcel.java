@@ -19,6 +19,7 @@ public class ReadExcel {
         FileInputStream inputStream = new FileInputStream(new File(fileName));
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         XSSFSheet sheet = workbook.getSheetAt(0);
+        inputStream.close();
         Iterator<Row> rowIterator = sheet.iterator();
         Row row = rowIterator.next();
 
@@ -46,6 +47,9 @@ public class ReadExcel {
             );
             listfromExcelData.add(fromExcelData);
         }
+        workbook.close();
+
+
         return listfromExcelData;
     }
 }

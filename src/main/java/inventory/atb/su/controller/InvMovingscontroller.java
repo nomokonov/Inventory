@@ -32,22 +32,22 @@ public class InvMovingscontroller {
         this.ldapService = ldapService;
     }
 
-    @GetMapping( "/")
+    @GetMapping("/")
     public String getAllWithInvMovings(@RequestParam(defaultValue = "0") Integer page,
-                          @RequestParam(defaultValue = "20") Integer pageSize,
-                          @RequestParam(defaultValue = "mol") String sortBy,
-                          @AuthenticationPrincipal LdapUserDetails userDetails,
-                          Principal user,
-                          Model model) throws InvalidNameException {
+                                       @RequestParam(defaultValue = "20") Integer pageSize,
+                                       @RequestParam(defaultValue = "codeDepartment") String sortBy,
+                                       @AuthenticationPrincipal LdapUserDetails userDetails,
+                                       Principal user,
+                                       Model model) throws InvalidNameException {
         String cn = ldapService.getCN(userDetails);
 
-        Page<InvMovings> result = fromExcelDataService.getAllWithInvMovings(page,pageSize,sortBy);
-        model.addAttribute("mol",cn);
-        model.addAttribute("dataList",result.getContent());
-        model.addAttribute("page",result.getPageable().getPageNumber());
-        model.addAttribute("pageSize",result.getPageable().getPageSize());
-        model.addAttribute("totalPages",result.getTotalPages());
-        model.addAttribute("totalElements",result.getTotalElements());
+        Page<InvMovings> result = fromExcelDataService.getAllWithInvMovings(page, pageSize, sortBy);
+        model.addAttribute("mol", cn);
+        model.addAttribute("dataList", result.getContent());
+        model.addAttribute("page", result.getPageable().getPageNumber());
+        model.addAttribute("pageSize", result.getPageable().getPageSize());
+        model.addAttribute("totalPages", result.getTotalPages());
+        model.addAttribute("totalElements", result.getTotalElements());
         model.addAttribute("user", user);
         return "invmovings";
     }

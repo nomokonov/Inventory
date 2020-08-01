@@ -29,7 +29,7 @@
             </div>
             <div th:if="${invNumber}">
                 <div class="h4" th:text="${invNumber.name}"></div>
-                <div>
+                <div  th:if="${not #strings.isEmpty(invNumber.invNumber)}">
                     <a th:href="'/user/' + ${invNumber.id} + '/print'" target="_blank" title="Печать">
                         <img th:src="'/rest/barcodes/zxing/code128/' + ${invNumber.invNumber}"/>
                     </a>
