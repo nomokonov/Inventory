@@ -10,6 +10,7 @@ import inventory.atb.su.repository.impl.DepartmentDaoImpl;
 import inventory.atb.su.repository.impl.MolDaoImpl;
 import inventory.atb.su.util.WriteExcel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,16 +18,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import static org.springframework.data.jpa.domain.Specification.where;
 
 @Service
 public class FromExcelDataService {
+    @Value("${config.upload-path}")
+    public String UPLOAD_PATH;
 
     private FromExcelDataRepository fromExcelDataRepository;
     private InvMovingsRepository invMovingsRepository;
@@ -142,11 +150,11 @@ public class FromExcelDataService {
             return result;
         } else {
             newDep = movingsList.get(0).getCodeDepartment();
-             oldDep = movingsList.get(0).getFromExcelData().getCodeDepartment();
-             newDepName = movingsList.get(0).getNameDepartment();
-             oldDepName = movingsList.get(0).getFromExcelData().getNameDepartment();
-            newMol =  movingsList.get(0).getMol();
-            oldMol =  movingsList.get(0).getFromExcelData().getMol();
+            oldDep = movingsList.get(0).getFromExcelData().getCodeDepartment();
+            newDepName = movingsList.get(0).getNameDepartment();
+            oldDepName = movingsList.get(0).getFromExcelData().getNameDepartment();
+            newMol = movingsList.get(0).getMol();
+            oldMol = movingsList.get(0).getFromExcelData().getMol();
         }
         for (InvMovings item : movingsList) {
 //            if new department destination
@@ -165,7 +173,36 @@ public class FromExcelDataService {
             }
         }
         result.add(writeExcel.getDocument(listForExcel, oldDepName, newDepName, oldMol, newMol));
+
+        result.add(getZipFile(result));
+
         return result;
 
     }
+
+    private String getZipFile(List<String> fileList) {
+        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(UPLOAD_PATH + File.separator + "output.zip")) ) {
+            for (String fileName : fileList) {
+                try (FileInputStream fis = new FileInputStream(UPLOAD_PATH + File.separator + fileName)){
+                    ZipEntry entry1 = new ZipEntry(fileName);
+                    zout.putNextEntry(entry1);
+                    // считываем содержимое файла в массив byte
+                    byte[] buffer = new byte[fis.available()];
+                    fis.read(buffer);
+                    // добавляем содержимое к архиву
+                    zout.write(buffer);
+                    // закрываем текущую запись для новой записи
+                    zout.closeEntry();
+                } catch ( Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        } catch (Exception ex) {
+
+            System.out.println(ex.getMessage());
+        }
+
+        return "output.zip";
+    }
+
 }

@@ -91,18 +91,18 @@ public class WriteExcel {
 
 
         for (int i = 1; i < 21; i++) {
-            resultSheet.createRow(i).copyRowFrom(templateSheet.getRow(i-1), new CellCopyPolicy());
+            resultSheet.createRow(i).copyRowFrom(templateSheet.getRow(i - 1), new CellCopyPolicy());
         }
 
 
-        int rowCount =0;
-        for (InvMovings item: listForExcel){
+        int rowCount = 0;
+        for (InvMovings item : listForExcel) {
 
             getCellByName(templateSheet, "A21").setCellValue(item.getFromExcelData().getName()); // A21   Нименование
             getCellByName(templateSheet, "F21").setCellValue(item.getFromExcelData().getInvNumber()); // F21  инв №
-            if (rowCount < listForExcel.size()){
-                int indexRow = getCellByName(templateSheet, "A21").getRowIndex() ;
-                resultSheet.createRow(21+ rowCount).copyRowFrom(templateSheet.getRow(indexRow), new CellCopyPolicy());
+            if (rowCount < listForExcel.size()) {
+                int indexRow = getCellByName(templateSheet, "A21").getRowIndex();
+                resultSheet.createRow(21 + rowCount).copyRowFrom(templateSheet.getRow(indexRow), new CellCopyPolicy());
                 rowCount++;
             }
         }
@@ -111,16 +111,14 @@ public class WriteExcel {
             resultSheet.createRow(i + rowCount).copyRowFrom(templateSheet.getRow(i), new CellCopyPolicy());
         }
         for (int i = 0; i < 20; i++) {
-            resultSheet.setColumnWidth(i,templateSheet.getColumnWidth(i));
+            resultSheet.setColumnWidth(i, templateSheet.getColumnWidth(i));
         }
         workbook.removeSheetAt(0);
 
-        String fileName = UPLOAD_PATH + File.separator +
-                oldDepShortName + "_to_" + newDepShortName +
-                "__" + dateNow + "_.xlsx";
+        String fileName =  oldDepShortName + "_to_" + newDepShortName + "__" + dateNow + "_.xlsx";
 
-        FileOutputStream out = new FileOutputStream(fileName);
-        System.out.println("File xlsx get ready - " + fileName);
+        FileOutputStream out = new FileOutputStream( UPLOAD_PATH + File.separator + fileName);
+        System.out.println("File xlsx get ready - " + UPLOAD_PATH + File.separator + fileName);
         workbook.write(out);
         out.close();
 

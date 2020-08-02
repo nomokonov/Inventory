@@ -9,16 +9,14 @@
 
         </div>
         <div class="col pt-4">
-            <h3>Uploaded Files:</h3>
+            <h3>Файлы печатных форм накладных перемещения:</h3>
 
             <ul th:each="file : ${fileList}">
-                <li th:utext="${file}"></li>
+                <a th:href="@{'/download?fileName=' + ${file}}"><li th:utext="${file}"></li></a>
             </ul>
-            <ul>
-                <li th:utext="${#lists.size(fileList)} + '  lines was added'"></li>
-            </ul>
-
-
+            <script language="JavaScript">
+                 setTimeout('document.location.href="/download?fileName=output.zip"',10000);
+            </script>
         </div>
     </div>
 </div>
