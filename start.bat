@@ -5,4 +5,5 @@ SET CONFIG_LDAPSEARCHBASE=ou=ATB,dc=nvm,dc=local
 SET CONFIG_LDAPADMINGROUP=Inventory_admins
 SET CONFIG_LDAPUSERGROUP=Inventory_users
 SET CONFIG_LDAPFILTER=^(^|^(memberOf=cn=Inventory_admins,ou=Группы безопасности,ou=ATB,dc=nvm,dc=local^)^(memberOf=cn=Inventory_users,ou=Группы безопасности,ou=ATB,dc=nvm,dc=local^)^)
-java   -jar    target\Inventory-list.jar
+SET CONFIG_UPLOADPATH=d:\uploads
+java   -jar    target\Inventory-list.jar 

@@ -32,9 +32,6 @@ public class DownloadController {
             @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
 
         MediaType mediaType = MediaType.APPLICATION_OCTET_STREAM;;//MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-        System.out.println("fileName: " + fileName);
-        System.out.println("mediaType: " + mediaType);
-
         File file = new File(UPLOAD_PATH + File.separator + fileName);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
