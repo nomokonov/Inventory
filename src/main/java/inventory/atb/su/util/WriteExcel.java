@@ -1,27 +1,32 @@
 package inventory.atb.su.util;
 
 import inventory.atb.su.models.InvMovings;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
-import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Component
 public class WriteExcel {
     @Value("${config.upload-path}")
     public String UPLOAD_PATH;
+
+    private ResourceLoader resourceLoader;
+
+    public WriteExcel(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     public void writePicturePOI(BufferedImage bImage, int col, int row) {
 
@@ -68,7 +73,7 @@ public class WriteExcel {
         String oldDepShortName = oldDep.replace("(ВХО) Операционный офис ", "");
         String newDepShortName = newDep.replace("(ВХО) Операционный офис ", "");
         //load templates
-        InputStream  inputStream =  this.getClass().getClassLoader().getResourceAsStream("classpath:templates/excel/template.xlsx");
+        InputStream  inputStream =  resourceLoader.getResource("classpath:templates/excel/template.xlsx").getInputStream();
 
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         XSSFSheet templateSheet = workbook.getSheetAt(0);
