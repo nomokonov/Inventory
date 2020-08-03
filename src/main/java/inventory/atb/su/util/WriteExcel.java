@@ -68,9 +68,8 @@ public class WriteExcel {
         String oldDepShortName = oldDep.replace("(ВХО) Операционный офис ", "");
         String newDepShortName = newDep.replace("(ВХО) Операционный офис ", "");
         //load templates
-        File file = ResourceUtils.getFile("classpath:templates/excel/template.xlsx");
+        InputStream  inputStream =  this.getClass().getClassLoader().getResourceAsStream("classpath:templates/excel/template.xlsx");
 
-        FileInputStream inputStream = new FileInputStream(file);
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         XSSFSheet templateSheet = workbook.getSheetAt(0);
         //for result
