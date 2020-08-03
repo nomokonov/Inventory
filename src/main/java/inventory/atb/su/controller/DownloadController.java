@@ -1,5 +1,6 @@
 package inventory.atb.su.controller;
 
+import inventory.atb.su.util.MediaTypeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -31,7 +32,7 @@ public class DownloadController {
     public ResponseEntity<InputStreamResource> downloadFile(
             @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
 
-        MediaType mediaType = MediaType.APPLICATION_OCTET_STREAM;;//MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
+        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, UPLOAD_PATH + File.separator + fileName);
         File file = new File(UPLOAD_PATH + File.separator + fileName);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 

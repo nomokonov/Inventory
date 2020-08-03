@@ -23,7 +23,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.zip.ZipEntry;
@@ -161,7 +160,8 @@ public class FromExcelDataService {
             if (newDep.equals(item.getCodeDepartment()) && oldDep.equals(item.getFromExcelData().getCodeDepartment())) {
                 listForExcel.add(item);
             } else {
-                result.add(writeExcel.getDocument(listForExcel, oldDepName, newDepName, oldMol, newMol));
+                result.add(writeExcel.getDocument(listForExcel, oldDepName, newDepName, oldDep, newDep,
+                        oldMol, newMol));
                 listForExcel.clear();
                 listForExcel.add(item);
                 newDep = item.getCodeDepartment();
@@ -172,7 +172,7 @@ public class FromExcelDataService {
                 oldMol = item.getFromExcelData().getMol();
             }
         }
-        result.add(writeExcel.getDocument(listForExcel, oldDepName, newDepName, oldMol, newMol));
+        result.add(writeExcel.getDocument(listForExcel, oldDepName, newDepName, oldDep, newDep, oldMol, newMol));
 
         result.add(getZipFile(result));
 

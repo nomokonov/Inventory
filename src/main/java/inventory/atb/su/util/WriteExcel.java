@@ -3,7 +3,9 @@ package inventory.atb.su.util;
 import inventory.atb.su.models.InvMovings;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
-import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -70,9 +72,9 @@ public class WriteExcel {
         }
     }
 
-    public String getDocument(List<InvMovings> listForExcel, String oldDep, String newDep, String oldMol, String newMol) throws IOException {
-        String oldDepShortName = oldDep.replace("(ВХО) Операционный офис ", "");
-        String newDepShortName = newDep.replace("(ВХО) Операционный офис ", "");
+    public String getDocument(List<InvMovings> listForExcel, String oldDepName, String newDepName, String oldDep, String newDep, String oldMol, String newMol) throws IOException {
+        String oldDepShortName = oldDepName.replace("(ВХО) Операционный офис ", "");
+        String newDepShortName = newDepName.replace("(ВХО) Операционный офис ", "");
         //load templates
 
         Resource resource = resourceLoader.getResource("classpath:templates/excel/template.xlsx");
@@ -101,7 +103,6 @@ public class WriteExcel {
             resultSheet.createRow(i).copyRowFrom(templateSheet.getRow(i - 1), new CellCopyPolicy());
         }
 
-
         int rowCount = 0;
         for (InvMovings item : listForExcel) {
 
@@ -122,9 +123,9 @@ public class WriteExcel {
         }
         workbook.removeSheetAt(0);
 
-        String fileName =  oldDepShortName + "_to_" + newDepShortName + "__" + dateNow + "_.xlsx";
+        String fileName = oldDep + "_to_" + newDep + "__" + dateNow + "_.xlsx";
 
-        FileOutputStream out = new FileOutputStream( UPLOAD_PATH + File.separator + fileName);
+        FileOutputStream out = new FileOutputStream(UPLOAD_PATH + File.separator + fileName);
         System.out.println("File xlsx get ready - " + UPLOAD_PATH + File.separator + fileName);
         workbook.write(out);
         out.close();
@@ -139,6 +140,5 @@ public class WriteExcel {
         return sheet.getRow(row).getCell(col);
 
     }
-
 
 }
