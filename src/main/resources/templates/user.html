@@ -9,45 +9,56 @@
         </div>
         <div class="col pt-4">
             <h3>Список имущества:</h3>
+            <div class="row">
+                <div class="col-7">
+                    <form action="" method="GET" id="form-mol-department">
+                        <div class="form-group row m-0 ">
+                            <label for="name-inv" class="col-sm-2 col-form-label">Наименование</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-sm" type="text" id="name-inv" name="name"
+                                       th:value="${name}"/>
+                            </div>
 
-            Фильтр:
-            <form class="form-inline" action="" method="GET" id="form-mol-department">
-                <div class="form-group">
-                    <label for="mol">МОЛ</label>
-                    <!--                    <input type="text" class="form-control-sm" id="mol" name="mol" ng-model="filterForm.mol" th:value="">-->
-                    <!--                    <select class="form-control-sm" id="mol"-->
-                    <!--                            name="mol"-->
-                    <!--                            ng-model="filterForm.mol"-->
-                    <!--                            ng-options="mol for mol in mols track by mol"-->
-                    <!--                    >-->
-                    <!--                    </select>-->
-                    <select class="form-control-sm" id="mol" name="mol">
-                        <option value="?"> ---</option>
-                        <option th:each="item : ${allMols}"
-                                th:value="${item}"
-                                th:utext="${item}"
-                                th:selected="${item} == ${mol}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="department">Подразделение</label>
-                    <!--                    <select class="form-control-sm" id="department"-->
-                    <!--                            name="codeDepartment"-->
-                    <!--                            ng-model="filterForm.department"-->
-                    <!--                            ng-options="department.nameDepartment for department in departments track by department.codeDepartment"-->
-                    <!--                    >-->
-                    <!--                    </select>   -->
-                    <select class="form-control-sm" id="department" name="codeDepartment">
-                        <option value="?"> ---</option>
-                        <option th:each="item : ${allDepartments}"
-                                th:value="${item.codeDepartment}"
-                                th:utext="${item.nameDepartment}"
-                                th:selected="${item.codeDepartment} == ${codeDepartment}"></option>
-                    </select>
+                        </div>
+                        <div class="form-group row  m-0 ">
+                            <label for="mol" class="col-sm-2 col-form-label">МОЛ</label>
 
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-sm" id="mol" name="mol">
+                                    <option value="?"> ---</option>
+                                    <option th:each="item : ${allMols}"
+                                            th:value="${item}"
+                                            th:utext="${item}"
+                                            th:selected="${item} == ${mol}"></option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group row  m-0 ">
+                            <label for="department" class="col-sm-2 col-form-label">Подразделение</label>
+
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-sm" id="department" name="codeDepartment">
+                                    <option value="?"> ---</option>
+                                    <option th:each="item : ${allDepartments}"
+                                            th:value="${item.codeDepartment}"
+                                            th:utext="${item.nameDepartment}"
+                                            th:selected="${item.codeDepartment} == ${codeDepartment}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row  m-0 ">
+                            <div class="col-sm-2 col-form-label"></div>
+                            <div class="col-sm-10">
+                                <button type="submit" class=" form-control-sm btn btn-primary">Применить</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class=" form-control-sm btn btn-primary">Применить</button>
-            </form>
+
+            </div>
+
+
             <div class="row">
                 <div class="col-md" th:text="'Найдено:' + ${totalElements}"></div>
             </div>
@@ -57,13 +68,13 @@
                     <a href=""
                        th:if="${page>0}"
                        th:with="p_codeDepartment=(${codeDepartment}? 'codeDepartment='+${codeDepartment}: null)"
-                       th:href="@{?(page=${page-1},mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}">Предыдущая
+                       th:href="@{?(page=${page-1},name=${name}? ${name},mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}">Предыдущая
                         стр</a>
                 </div>
                 <div class="col">
                     <a href="@{}"
                        th:if="${page<totalPages-1}"
-                       th:href="@{?(page=${page+1} ,mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}"
+                       th:href="@{?(page=${page+1} ,name=${name}? ${name},mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}"
                     >Следующая стр</a>
                 </div>
                 <div class="col" th:text="' Выводить по: ' + ${pageSize}"></div>

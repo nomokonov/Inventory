@@ -64,12 +64,17 @@ public class FromExcelDataService {
         fromExcelDataRepository.saveAll(fromExcelDataList);
     }
 
-    public Page<FromExcelData> getAllByMol(String mol, Integer page, Integer pageSize, String sortBy, Optional<String> codeDepartment) {
+    public Page<FromExcelData> getAllByMol(String mol, Integer page, Integer pageSize, String sortBy,
+                                           Optional<String> codeDepartment, Optional<String> name) {
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
         Specification<FromExcelData> fromExcelDataSpecification = null;
         if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")) {
             fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
                     criteriaBuilder.equal(root.get("codeDepartment"), codeDepartment.get()));
+        }
+        if (name.isPresent() && !name.get().isEmpty()) {
+            fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.get().toLowerCase() +"%"));
         }
         fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("mol"), mol));

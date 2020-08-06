@@ -44,6 +44,7 @@ public class UserController {
 						  @RequestParam(defaultValue = "name") String sortBy,
 						  @RequestParam(required = false) Optional<String> codeDepartment,
 						  @RequestParam(required = false) Optional<String> mol,
+						  @RequestParam(required = false) Optional<String> name,
 							@AuthenticationPrincipal LdapUserDetails userDetails,
 			Principal user,
 			Model model) throws InvalidNameException {
@@ -54,8 +55,12 @@ public class UserController {
 		if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")){
 			model.addAttribute("codeDepartment",codeDepartment.get());
 		}
+		if (name.isPresent() && !name.get().isEmpty()){
+			model.addAttribute("name",name.get());
+		}
 
-		Page<FromExcelData> result = fromExcelDataService.getAllByMol(cn,page,pageSize,sortBy,codeDepartment);
+
+		Page<FromExcelData> result = fromExcelDataService.getAllByMol(cn,page,pageSize,sortBy,codeDepartment, name);
 		List<DepartmentDTO> allDepartments = fromExcelDataService.getAllDepartments();
 		List<String> allMols = fromExcelDataService.getAllMols();
 		model.addAttribute("allDepartments",allDepartments);
