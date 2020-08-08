@@ -20,7 +20,8 @@
                     <label for="department">Инвентарный номер:</label>
                     <input class="form-control-sm" id="invnumber" name="invnumber"
                            th:value="${invNumber} ? ${invNumber.invNumber}"
-                           autofocus>
+                           autofocus
+                           onfocus="this.select()">
                     <!--                        <div class="col-md-3">-->
                     <button class="btn btn-primary" type="submit">Найти</button>
                     <!--                    onclick="searchInvNumber(); return false;"-->
