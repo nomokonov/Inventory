@@ -50,7 +50,7 @@ public class UserController {
 			Model model) throws InvalidNameException {
 		String cn = ldapService.getCN(userDetails);
 		if (mol.isPresent() && !mol.get().equals("?")){
-			cn=mol.get();
+			model.addAttribute("mol",mol.get());
 		}
 		if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")){
 			model.addAttribute("codeDepartment",codeDepartment.get());
@@ -60,12 +60,11 @@ public class UserController {
 		}
 
 
-		Page<FromExcelData> result = fromExcelDataService.getAllByMol(cn,page,pageSize,sortBy,codeDepartment, name);
+		Page<FromExcelData> result = fromExcelDataService.getAllByFilter(mol,page,pageSize,sortBy,codeDepartment, name);
 		List<DepartmentDTO> allDepartments = fromExcelDataService.getAllDepartments();
 		List<String> allMols = fromExcelDataService.getAllMols();
 		model.addAttribute("allDepartments",allDepartments);
 		model.addAttribute("allMols", allMols);
-		model.addAttribute("mol",cn);
 		model.addAttribute("dataList",result.getContent());
 		model.addAttribute("page",result.getPageable().getPageNumber());
 		model.addAttribute("pageSize",result.getPageable().getPageSize());

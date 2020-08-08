@@ -73,8 +73,8 @@ public class WriteExcel {
     }
 
     public String getDocument(List<InvMovings> listForExcel, String oldDepName, String newDepName, String oldDep, String newDep, String oldMol, String newMol) throws IOException {
-        String oldDepShortName = oldDepName.replace("(ВХО) Операционный офис ", "");
-        String newDepShortName = newDepName.replace("(ВХО) Операционный офис ", "");
+        String oldDepShortName = oldDepName.substring(oldDepName.indexOf("№"));
+        String newDepShortName = newDepName.substring(oldDepName.indexOf("№"));
         //load templates
 
         Resource resource = resourceLoader.getResource("classpath:templates/excel/template.xlsx");

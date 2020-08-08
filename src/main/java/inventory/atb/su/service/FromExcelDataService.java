@@ -64,23 +64,23 @@ public class FromExcelDataService {
         fromExcelDataRepository.saveAll(fromExcelDataList);
     }
 
-    public Page<FromExcelData> getAllByMol(String mol, Integer page, Integer pageSize, String sortBy,
-                                           Optional<String> codeDepartment, Optional<String> name) {
+    public Page<FromExcelData> getAllByFilter(Optional<String> mol, Integer page, Integer pageSize, String sortBy,
+                                              Optional<String> codeDepartment, Optional<String> name) {
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
         Specification<FromExcelData> fromExcelDataSpecification = null;
-        if (codeDepartment.isPresent() && !codeDepartment.get().equals("?")) {
+        if (codeDepartment.isPresent() && !codeDepartment.get().isEmpty()) {
             fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
                     criteriaBuilder.equal(root.get("codeDepartment"), codeDepartment.get()));
         }
         if (name.isPresent() && !name.get().isEmpty()) {
             fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.get().toLowerCase() +"%"));
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.get().toLowerCase() + "%"));
         }
-        fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("mol"), mol));
-        Page<FromExcelData> pagedResult = fromExcelDataRepository.findAll(fromExcelDataSpecification, pageable);
-
-        return pagedResult;
+        if (mol.isPresent() && !mol.get().isEmpty()) {
+            fromExcelDataSpecification = where(fromExcelDataSpecification).and((root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("mol"), mol.get()));
+        }
+            return fromExcelDataRepository.findAll(fromExcelDataSpecification, pageable);
 
     }
 
@@ -186,9 +186,9 @@ public class FromExcelDataService {
     }
 
     private String getZipFile(List<String> fileList) {
-        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(UPLOAD_PATH + File.separator + "output.zip")) ) {
+        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(UPLOAD_PATH + File.separator + "output.zip"))) {
             for (String fileName : fileList) {
-                try (FileInputStream fis = new FileInputStream(UPLOAD_PATH + File.separator + fileName)){
+                try (FileInputStream fis = new FileInputStream(UPLOAD_PATH + File.separator + fileName)) {
                     ZipEntry entry1 = new ZipEntry(fileName);
                     zout.putNextEntry(entry1);
                     // считываем содержимое файла в массив byte
@@ -198,7 +198,7 @@ public class FromExcelDataService {
                     zout.write(buffer);
                     // закрываем текущую запись для новой записи
                     zout.closeEntry();
-                } catch ( Exception e){
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
             }

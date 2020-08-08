@@ -25,7 +25,7 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control form-control-sm" id="mol" name="mol">
-                                    <option value="?"> ---</option>
+                                    <option value=""> ---</option>
                                     <option th:each="item : ${allMols}"
                                             th:value="${item}"
                                             th:utext="${item}"
@@ -39,7 +39,7 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control form-control-sm" id="department" name="codeDepartment">
-                                    <option value="?"> ---</option>
+                                    <option value=""> ---</option>
                                     <option th:each="item : ${allDepartments}"
                                             th:value="${item.codeDepartment}"
                                             th:utext="${item.nameDepartment}"
@@ -68,13 +68,13 @@
                     <a href=""
                        th:if="${page>0}"
                        th:with="p_codeDepartment=(${codeDepartment}? 'codeDepartment='+${codeDepartment}: null)"
-                       th:href="@{?(page=${page-1},name=${name}? ${name},mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}">Предыдущая
+                       th:href="@{?(page=${page-1},name=${name}? ${name},mol=${mol}? ${mol},codeDepartment=${codeDepartment}? ${codeDepartment})}">Предыдущая
                         стр</a>
                 </div>
                 <div class="col">
                     <a href="@{}"
                        th:if="${page<totalPages-1}"
-                       th:href="@{?(page=${page+1} ,name=${name}? ${name},mol=${mol}? ${mol},codeDepartment=${codeDepartment}?:'?')}"
+                       th:href="@{?(page=${page+1} ,name=${name}? ${name},mol=${mol}? ${mol},codeDepartment=${codeDepartment}? ${codeDepartment})}"
                     >Следующая стр</a>
                 </div>
                 <div class="col" th:text="' Выводить по: ' + ${pageSize}"></div>
