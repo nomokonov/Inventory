@@ -1,6 +1,9 @@
-<div th:include="common :: header"></div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: header"></head>
+<body class="bg-gray">
 
-<div th:include="common :: topnavbar"></div>
+<div th:replace="common :: topnavbar"></div>
 <div class="container">
     <div class="row ">
         <div class="col-md-4 align-self-center">
@@ -18,8 +21,8 @@
                            required>
                 </p>
                 <input type="hidden"
-                        th:name="${_csrf.parameterName}"
-                        th:value="${_csrf.token}"/>
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}"/>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             </form>
         </div>
@@ -27,4 +30,7 @@
 
 </div>
 
-<div th:include="common :: footer"></div>
+<div th:replace="common :: footer"></div>
+
+</body>
+</html>

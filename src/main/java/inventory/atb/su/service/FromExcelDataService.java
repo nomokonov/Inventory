@@ -130,6 +130,9 @@ public class FromExcelDataService {
     }
 
     public Optional<FromExcelData> getByInvNumber(String invnumber) {
+        if (invnumber.isEmpty()){
+            return Optional.empty();
+        }
         return fromExcelDataRepository.findByInvNumber(invnumber);
     }
 

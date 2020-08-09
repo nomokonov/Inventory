@@ -1,7 +1,8 @@
-<div th:include="common :: header"></div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: header"></head>
 
-<div th:replace="common :: topnavbar"></div>
-
+<body class="bg-gray">
 <div class="container-fluid ">
     <div class="row ">
         <div class="col-2 p-0 ">
@@ -12,4 +13,7 @@
         </div>
     </div>
 </div>
-<div th:include="common :: footer"></div>
+<div th:replace="common :: footer"></div>
+
+</body>
+</html>
