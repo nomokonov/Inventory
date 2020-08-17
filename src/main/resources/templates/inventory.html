@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: header"></head>
+<body class="bg-gray">
+
+<div th:replace="common :: topnavbar"></div>
+
+<div class="container-fluid ">
+    <div class="row ">
+        <div class="col-2 p-0 ">
+            <div th:replace="common :: leftnavbar"></div>
+        </div>
+        <div class="col pt-4">
+            <h3>Имущество:</h3>
+            <div class="alert alert-danger" role="alert"
+                 th:if="${message}" th:utext="${message}">
+                АХТУНГ!
+            </div>
+
+            <div>
+                <form class="form-inline" action="/inventory/" method="GET" id="form-invnumber">
+                    <label for="department">Инвентарный номер:</label>
+                    <input class="form-control-sm" id="invnumber" name="findInvNumber"
+                           th:value="${invNumber} ? ${invNumber.invNumber}"
+                           autofocus
+                           onfocus="this.select()">
+                    <button class="btn btn-primary" type="submit">Найти</button>
+                </form>
+            </div>
+            <div class="card"
+                 th:if="${invNumber}">
+                <div class="card-header h3"
+                     th:text="${invNumber.name}"></div>
+                <div class="card-body">
+                    <div
+                            th:if="${not #strings.isEmpty(invNumber.invNumber)}">
+
+                            <div class="h3" th:text="${invNumber.invNumber}"></div>
+
+                    </div>
+                    <div class="alert alert-danger" role="alert" th:if="${invNumber.invMovings}">
+                        <div>по выбранному инвентарномму есть назначенные изменения</div>
+                        <div
+                                th:utext="${invNumber.invMovings.mol}">
+                            АХТУНГ!
+                        </div>
+                        <div
+                                th:utext="${invNumber.invMovings.nameDepartment}">
+                            АХТУНГ!
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">МОЛ</div>
+                        <div class="col-sm-10" th:text="${invNumber.mol}">МОЛ
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">Подразделение</div>
+                        <div class="col-sm-10" th:text="${invNumber.nameDepartment}">МОЛ
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">Тип ТМЦ</div>
+                        <div class="col-sm-10" th:text="${invNumber.typeTMC}">A description list is perfect for defining
+                            terms.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">Вид Использования</div>
+                        <div class="col-sm-10" th:text="${invNumber.typeUtilize}">A description list is perfect for
+                            defining terms.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">Внесистемный</div>
+                        <div class="col-sm-10" th:text="${invNumber.nonSystem}">A description list is perfect for defining
+                            terms.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">Наименование группы</div>
+                        <div class="col-sm-10" th:text="${invNumber.nameGroup}">A description list is perfect for defining
+                            terms.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">Цена</div>
+                        <div class="col-sm-10" th:text="${invNumber.price}">A description list is perfect for defining
+                            terms.
+                        </div>
+                    </div>
+                    <p></p>
+                    <form class="form" th:action="${invNumber} ? '/inventory/' + ${invNumber.id}" method="POST"
+                          id="form-mol-department">
+                        <input
+                                type="hidden"
+                                th:name="${_csrf.parameterName}"
+                                th:value="${_csrf.token}"/>
+                        <div class="form-group row m-0 ">
+                            <label for="mol" class="col-sm-2 col-form-label">МОЛ</label>
+                            <div class="col-sm-10">
+                                <select class="form-control-sm" id="mol" name="mol">
+                                    <option value="?"> ---</option>
+                                    <option th:each="item : ${allMols}"
+                                            th:value="${item}"
+                                            th:utext="${item}"
+                                            th:selected="${item} == ${mol}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row m-0 ">
+                            <label for="department" class="col-sm-2 col-form-label">Подразделение</label>
+                            <div class="col-sm-10">
+                                <select class="form-control-sm" id="department" name="codeDepartment">
+                                    <option value="?"> ---</option>
+                                    <option th:each="item : ${allDepartments}"
+                                            th:value="${item.codeDepartment}"
+                                            th:utext="${item.nameDepartment}"
+                                            th:selected="${item.codeDepartment} == ${codeDepartment}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row  m-0 ">
+                            <div class="col-sm-2 col-form-label"></div>
+                            <div class="col-sm-10">
+                                <button type="submit" class=" form-control-sm btn btn-primary">Применить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="common :: footer"></div>
+
+</body>
+</html>

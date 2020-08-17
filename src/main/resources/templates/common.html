@@ -19,15 +19,15 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand"  href="/">
+    <a class="navbar-brand" href="/">
         <img src="/static/images/favicon.png" width="30" height="30" alt="">
         Inventory list</a>
 
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
           <span class="navbar-text mr-auto mt-2 mt-lg-0"
-             th:if="${user}"
-             th:text="'Вы вошли как, ' + ${user.name} + ' | ' + ${user.principal.Dn}">
+                th:if="${user}"
+                th:text="'Вы вошли как, ' + ${user.name} + ' | ' + ${user.principal.Dn}">
 
         </span>
         <form class="form-inline  my-2 my-lg-0" id="logout-form" action="/logout" method="POST">
@@ -35,7 +35,8 @@
                    th:name="${_csrf.parameterName}"
                    th:value="${_csrf.token}"/>
             <button th:if="${user}"
-                    class="btn btn-link my-2 my-sm-0" type="submit">Выйти</button>
+                    class="btn btn-link my-2 my-sm-0" type="submit">Выйти
+            </button>
         </form>
 
     </div>
@@ -51,6 +52,10 @@
         <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">
             <a href="/admin/" class="list-group-item list-group-item-action  rounded-0 border-0 "
                th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/')}? active">Admin</a>
+        </div>
+        <div sec:authorize="${hasAuthority(@environment.getProperty('config.ldap-admingroup'))}">
+            <a href="/inventory/" class="list-group-item list-group-item-action  rounded-0 border-0 "
+               th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/inventory/')}? active">Инвентаризация</a>
         </div>
         <a href="/user/" class="list-group-item list-group-item-action rounded-0 border-0"
            th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/user/')}? active"
