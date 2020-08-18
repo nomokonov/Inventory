@@ -32,6 +32,7 @@ public class InventoryController {
     @GetMapping("/")
     public String InventoryFind(
             @RequestParam(required = false) Optional<String> findInvNumber,
+            @RequestParam(required = false) Optional<String> codeDepartment,
 //            @AuthenticationPrincipal LdapUserDetails userDetails,
             Principal user,
             Model model) throws InvalidNameException {
@@ -42,21 +43,49 @@ public class InventoryController {
         List<String> mols = fromExcelDataService.getAllMols();
         model.addAttribute("allDepartments", allDepartments);
         model.addAttribute("allMols", mols);
+        if (codeDepartment.isPresent() && !codeDepartment.get().isEmpty()){
+            model.addAttribute("codeDepartment", codeDepartment.get());
+        }
         if (findInvNumber.isPresent()){
             Optional<FromExcelData> invNumber = fromExcelDataService.getByInvNumber(findInvNumber.get());
             if (invNumber.isPresent()) {
                 model.addAttribute("mol", invNumber.get().getMol());
-                model.addAttribute("codeDepartment", invNumber.get().getCodeDepartment());
                 model.addAttribute("invNumber", invNumber.get());
 
             } else {
                 model.addAttribute("message", "Введеный Инв.№ не найден");
             }
-        } else{
-            model.addAttribute("message", "Начало");
         }
+        return "inventory";
+    }
 
+    @PostMapping("/")
+    public String MoveToDepartment(@RequestParam Long id,
+                                @AuthenticationPrincipal LdapUserDetails userDetails,
+                                Principal user,
+                                @RequestParam("mol") String mol,
+                                @RequestParam("codeDepartment") String codeDeparment,
+                                Model model) {
+        FromExcelData frpFromExcelData = fromExcelDataService.update(id, mol, codeDeparment);
 
+        model.addAttribute("user", user);
+        List<DepartmentDTO> allDepartments = fromExcelDataService.getAllDepartments();
+        List<String> mols = fromExcelDataService.getAllMols();
+        model.addAttribute("allDepartments", allDepartments);
+        model.addAttribute("allMols", mols);
+            model.addAttribute("codeDepartment", codeDeparment);
+        if (id >= 0) {
+            Optional<FromExcelData> invNumber = fromExcelDataService.getById(id);
+            if (invNumber.isPresent()) {
+                model.addAttribute("mol", invNumber.get().getMol());
+                model.addAttribute("invNumber", invNumber.get());
+
+            } else {
+                model.addAttribute("message", "Введеный Инв.№ не найден");
+            }
+        }else{
+            model.addAttribute("message", "ошибка при изменении позиции");
+        }
 
         return "inventory";
     }
