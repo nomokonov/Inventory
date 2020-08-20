@@ -46,6 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${config.upload-path}")
     public  String UPLOAD_PATH;
 
+    @Value("${spring.datasource.url}")
+    public  String SPRING_DATASOURCE_URL;
+
+
     @Autowired
     public WebSecurityConfig(CustomSuccessHandler customSuccessHandler) {
         this.customSuccessHandler = customSuccessHandler;
@@ -95,6 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private void ConfigPrint() {
+        logger.info("SPRING_DATASOURCE_URL = " + SPRING_DATASOURCE_URL);
         logger.info("LDAP_SEARCHBASE = " + LDAP_SEARCHBASE);
         logger.info("LDAP_DOMAIN =     " + LDAP_DOMAIN);
         logger.info("LDAP_URL =        " + LDAP_URL);

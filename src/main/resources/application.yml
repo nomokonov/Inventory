@@ -5,4 +5,22 @@ config:
   ldap-filter: '(|(memberOf=cn=Inventory_admins,ou=Группы безопасности,ou=ATB,dc=nvm,dc=local)(memberOf=cn=Inventory_users,ou=Группы безопасности,ou=ATB,dc=nvm,dc=local))'
   ldap-admingroup: 'Inventory_admins'
   ldap-usergroup: 'Inventory_users'
-  upload-path: 'd:\upload'
+  upload-path: ${CONFIG_UPLOADPATH:d:\uploads}
+
+server:
+  port: ${PORT:8080}
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/inventory}
+    username: ${SPRING_DATASOURCE_USERNAME:inventory}
+    password: ${SPRING_DATASOURCE_PASSWORD:123456}
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+      enabled: true
+      location: ${SPRING_SERVLET_MULTIPART_LOCATION:d:\\uploads\\}
+    #  ${java.io.tmpdir}
+upload:
+  path: d:\\uploads\\
