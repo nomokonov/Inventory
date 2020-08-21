@@ -1,7 +1,5 @@
 package inventory.atb.su.models;
 
-import liquibase.pro.packaged.m;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -18,7 +16,7 @@ public class FromExcelData {
     @Column(name = "invnumber")
     private String invNumber;
     @Column(name = "quantity")
-    private Integer quantity;
+    private Double quantity;
     @Column(name = "unit")
     private String unit;
     @Column(name = "price")
@@ -52,7 +50,7 @@ public class FromExcelData {
     @OneToOne(mappedBy = "fromExcelData", cascade = CascadeType.ALL)
     private InvMovings invMovings;
 
-    protected FromExcelData() {
+    public FromExcelData() {
     }
 
     public FromExcelData(String name, String invNumber, double quantity, String unit,
@@ -62,7 +60,7 @@ public class FromExcelData {
                          Date datePostings, Date dateExploit, Date dateClosin) {
         this.name = name;
         this.invNumber = invNumber;
-        this.quantity = Double.valueOf(quantity).intValue();
+        this.quantity = quantity;
         this.unit = unit;
         this.price = price;
         this.typeTMC = typeTMC;
@@ -105,11 +103,11 @@ public class FromExcelData {
         this.invNumber = invNumber;
     }
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

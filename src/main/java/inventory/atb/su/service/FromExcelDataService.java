@@ -8,7 +8,9 @@ import inventory.atb.su.repository.FromExcelDataRepository;
 import inventory.atb.su.repository.InvMovingsRepository;
 import inventory.atb.su.repository.impl.DepartmentDaoImpl;
 import inventory.atb.su.repository.impl.MolDaoImpl;
+import inventory.atb.su.util.ReadExcel;
 import inventory.atb.su.util.WriteExcel;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -212,5 +216,9 @@ public class FromExcelDataService {
 
         return "output.zip";
     }
-
+    public int getFromExcelData(ArrayList<File> uploadedFiles) throws IOException, OpenXML4JException, SAXException {
+        List<FromExcelData> fromExcelDataList = ReadExcel.ReadFromFile(uploadedFiles.get(0).getAbsolutePath());
+        saveAll(fromExcelDataList);
+        return fromExcelDataList.size();
+    }
 }

@@ -1,28 +1,24 @@
 package inventory.atb.su.controller;
 
-import inventory.atb.su.models.FromExcelData;
-import inventory.atb.su.models.dto.DepartmentDTO;
 import inventory.atb.su.service.FromExcelDataService;
 import inventory.atb.su.service.LDAPService;
 import inventory.atb.su.util.MyUploadForm;
-import inventory.atb.su.util.ReadExcel;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.ldap.userdetails.LdapUserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.xml.sax.SAXException;
 
-import javax.naming.InvalidNameException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -53,7 +49,7 @@ public class  AdminController {
     public String uploadOneFileHandlerPOST(HttpServletRequest request,
                                            Principal user,
                                            Model model,
-                                           @ModelAttribute("myUploadForm") MyUploadForm myUploadForm) throws IOException {
+                                           @ModelAttribute("myUploadForm") MyUploadForm myUploadForm) throws IOException, OpenXML4JException, SAXException {
 
         ArrayList<File> uploadedFiles = new ArrayList<File>();
         ArrayList<String> failedFiles = new ArrayList<String>();
@@ -63,9 +59,8 @@ public class  AdminController {
         if (myUploadForm.getClear_table()) {
             fromExcelDataService.deleteAll();
         }
-        List<FromExcelData> fromExcelDataList = ReadExcel.ReadFromFile(uploadedFiles.get(0).getAbsolutePath());
-        fromExcelDataService.saveAll(fromExcelDataList);
-        model.addAttribute("obj_count", fromExcelDataList.size());
+        int lines = fromExcelDataService.getFromExcelData(uploadedFiles);
+        model.addAttribute("obj_count", lines);
         model.addAttribute("failedFiles", failedFiles);
         return "uploadResult";
     }

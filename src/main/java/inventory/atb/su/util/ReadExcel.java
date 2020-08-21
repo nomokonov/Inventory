@@ -1,25 +1,82 @@
 package inventory.atb.su.util;
 
 import inventory.atb.su.models.FromExcelData;
+import inventory.atb.su.security.WebSecurityConfig;
+import org.apache.poi.ooxml.util.SAXHelper;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.openxml4j.opc.PackageAccess;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.eventusermodel.ReadOnlySharedStringsTable;
+import org.apache.poi.xssf.eventusermodel.XSSFReader;
+import org.apache.poi.xssf.eventusermodel.XSSFSheetXMLHandler;
+import org.apache.poi.xssf.model.StylesTable;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class ReadExcel {
 
-    public static List<FromExcelData> ReadFromFile(String fileName) throws IOException {
+    static Logger logger = LoggerFactory.getLogger(ReadExcel.class);
+
+    public static List<FromExcelData> ReadFromFile(String fileName) throws IOException, OpenXML4JException, SAXException {
+
         List<FromExcelData> listfromExcelData = new ArrayList<>();
+
+        OPCPackage xlsxPackage = OPCPackage.open(fileName, PackageAccess.READ);
+        ReadOnlySharedStringsTable strings = new ReadOnlySharedStringsTable(xlsxPackage);
+        XSSFReader xssfReader = new XSSFReader(xlsxPackage);
+        StylesTable styles = xssfReader.getStylesTable();
+        XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssfReader.getSheetsData();
+        int index = 0;
+        if (iter.hasNext()) {
+            try (InputStream stream = iter.next()) {
+                processSheet(styles, strings, new MappingFromXml(listfromExcelData), stream);
+            }
+        }
+
+
+        return  listfromExcelData;
+//        return getFromExcelDataOld(fileName, listfromExcelData);
+    }
+
+    private static void processSheet(StylesTable styles, ReadOnlySharedStringsTable strings, MappingFromXml mappingFromXml, InputStream sheetInputStream) throws IOException, SAXException {
+        DataFormatter formatter = new DataFormatter();
+        InputSource sheetSource = new InputSource(sheetInputStream);
+        try {
+            XMLReader sheetParser = SAXHelper.newXMLReader();
+            ContentHandler handler = new XSSFSheetXMLHandler(
+                    styles, null, strings, mappingFromXml, formatter, false);
+
+            sheetParser.setContentHandler(handler);
+            sheetParser.parse(sheetSource);
+        } catch(ParserConfigurationException e) {
+            throw new RuntimeException("SAX parser appears to be broken - " + e.getMessage());
+        }
+    }
+
+    private static List<FromExcelData> getFromExcelDataOld(String fileName, List<FromExcelData> listfromExcelData) throws IOException {
         FileInputStream inputStream = new FileInputStream(new File(fileName));
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         XSSFSheet sheet = workbook.getSheetAt(0);
-        inputStream.close();
+
+
         Iterator<Row> rowIterator = sheet.iterator();
         Row row = rowIterator.next();
 
@@ -48,8 +105,9 @@ public class ReadExcel {
             listfromExcelData.add(fromExcelData);
         }
         workbook.close();
+        inputStream.close();
 
-
+        logger.info("upload lines = " + listfromExcelData.size());
         return listfromExcelData;
     }
 }
