@@ -133,9 +133,9 @@
                                 th:value="${_csrf.token}"/>
                         <div class="form-group row  m-0 ">
                             <div class="col-sm-2 col-form-label"></div>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" th:if="${codeDepartment} and ${codeDepartment}!='?'" >
                                 <button
-                                        th:if="!(${invNumber.codeDepartment} == ${codeDepartment})"
+                                        th:if=" !(${invNumber.codeDepartment} == ${codeDepartment})"
                                         type="submit" class=" form-control-sm btn btn-primary"
                                         th:text="'Переместить в - ' + ${codeDepartment} ">Переместить</button>
                             </div>
