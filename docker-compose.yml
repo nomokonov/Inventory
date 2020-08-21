@@ -1,0 +1,39 @@
+version: '2'
+services:
+  inventory:
+    build: .
+    command: java -jar Inventory-list.jar
+    ports:
+     - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/inventory
+      - SPRING_DATASOURCE_USERNAME=inventory
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - CONFIG_LDAPDOMAIN=atb.su
+      - CONFIG_LDAPURL=ldap://atb.su:389
+      - CONFIG_LDAPSEARCHBASE=ou=ATB,dc=atb,dc=su
+      - CONFIG_LDAPADMINGROUP=Chita_admins
+      - CONFIG_LDAPUSERGROUP=Chita_inventory
+      - CONFIG_LDAPFILTER=(|(memberOf=CN=Chita_admins,OU=Admins,OU=ГО,OU=_ATB - Группы управления,DC=atb,DC=su)(memberOf=CN=Chita_inventory,OU=Чита,OU=_ATB - Группы управления,DC=atb,DC=su))
+      - CONFIG_UPLOADPATH=/var/uploads
+    volumes:
+      - uploads:/var/uploads/
+    
+    depends_on:
+      - postgres
+    restart: always
+
+  postgres:
+    image: postgres:11
+    ports:
+      - 5432:5432
+    env_file:
+      - database.env 
+    volumes:
+      - database-data:/var/lib/postgresql/data/ 
+    restart: always
+    
+volumes:
+  database-data:
+  uploads:
+
