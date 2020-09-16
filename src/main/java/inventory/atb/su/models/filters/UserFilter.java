@@ -1,7 +1,5 @@
 package inventory.atb.su.models.filters;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.Optional;
 
 public class UserFilter {

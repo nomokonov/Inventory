@@ -1,10 +1,14 @@
 package inventory.atb.su.models;
 
 import inventory.atb.su.models.dto.DepartmentDTO;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "movings")
 public class InvMovings {
@@ -32,39 +36,4 @@ public class InvMovings {
         this.fromExcelData = fromExcelData;
     }
 
-    public String getMol() {
-        return mol;
-    }
-
-    public void setMol(String mol) {
-        this.mol = mol;
-    }
-
-    public String getCodeDepartment() {
-        return codeDepartment;
-    }
-
-    public void setCodeDepartment(String codeDepartment) {
-        this.codeDepartment = codeDepartment;
-    }
-
-    public String getNameDepartment() {
-        return nameDepartment;
-    }
-
-    public void setNameDepartment(String nameDepartment) {
-        this.nameDepartment = nameDepartment;
-    }
-
-    public FromExcelData getFromExcelData() {
-        return fromExcelData;
-    }
-
-    public void setFromExcelData(FromExcelData fromExcelData) {
-        this.fromExcelData = fromExcelData;
-    }
-
-    public Long getId() {
-        return  id;
-    }
 }

@@ -1,9 +1,14 @@
 package inventory.atb.su.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "fromexcel")
 public class FromExcelData {
@@ -79,163 +84,4 @@ public class FromExcelData {
         this.invMovings = null;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getInvNumber() {
-        return invNumber;
-    }
-
-    public void setInvNumber(String invNumber) {
-        this.invNumber = invNumber;
-    }
-
-    public Double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getTypeTMC() {
-        return typeTMC;
-    }
-
-    public void setTypeTMC(String typeTMC) {
-        this.typeTMC = typeTMC;
-    }
-
-    public String getTypeUtilize() {
-        return typeUtilize;
-    }
-
-    public void setTypeUtilize(String typeUtilize) {
-        this.typeUtilize = typeUtilize;
-    }
-
-    public String getCodeGroup() {
-        return codeGroup;
-    }
-
-    public void setCodeGroup(String codeGroup) {
-        this.codeGroup = codeGroup;
-    }
-
-    public String getNameGroup() {
-        return nameGroup;
-    }
-
-    public void setNameGroup(String nameGroup) {
-        this.nameGroup = nameGroup;
-    }
-
-    public String getMol() {
-        return mol;
-    }
-
-    public void setMol(String mol) {
-        this.mol = mol;
-    }
-
-    public String getMolCodeDepartment() {
-        return molCodeDepartment;
-    }
-
-    public void setMolCodeDepartment(String molCodeDepartment) {
-        this.molCodeDepartment = molCodeDepartment;
-    }
-
-    public String getCodeDepartment() {
-        return codeDepartment;
-    }
-
-    public void setCodeDepartment(String codeDepartment) {
-        this.codeDepartment = codeDepartment;
-    }
-
-    public String getNameDepartment() {
-        return nameDepartment;
-    }
-
-    public void setNameDepartment(String nameDepartment) {
-        this.nameDepartment = nameDepartment;
-    }
-
-    public String getNonSystem() {
-        return nonSystem;
-    }
-
-    public void setNonSystem(String nonSystem) {
-        this.nonSystem = nonSystem;
-    }
-
-    public LocalDate getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDatePostings() {
-        return datePostings;
-    }
-
-    public void setDatePostings(LocalDate datePostings) {
-        this.datePostings = datePostings;
-    }
-
-    public LocalDate getDateExploit() {
-        return dateExploit;
-    }
-
-    public void setDateExploit(LocalDate dateExploit) {
-        this.dateExploit = dateExploit;
-    }
-
-    public LocalDate getDateClosin() {
-        return dateClosin;
-    }
-
-    public void setDateClosin(LocalDate dateClosin) {
-        this.dateClosin = dateClosin;
-    }
-
-    public InvMovings getInvMovings() {
-        return invMovings;
-    }
-
-    public void setInvMovings(InvMovings invMovings) {
-        this.invMovings = invMovings;
-    }
 }
