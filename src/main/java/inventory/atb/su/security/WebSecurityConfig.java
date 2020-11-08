@@ -62,9 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/rest/**" ).permitAll()
 
-                .antMatchers("/user/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
+                .antMatchers("/user/**","/inventory/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
                 .antMatchers("/invmovings/**").access("hasAnyAuthority('" + LDAP_USERGROUP + "','" + LDAP_ADMINGROUP + "')")
-                .antMatchers("/admin/**","/inventory/**").hasAuthority(LDAP_ADMINGROUP)
+                .antMatchers("/admin/**").hasAuthority(LDAP_ADMINGROUP)
 //                .anyRequest().authenticated()
                 .and()
                 .formLogin()
